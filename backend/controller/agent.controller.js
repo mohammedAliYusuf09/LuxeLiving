@@ -106,6 +106,20 @@ const logInAgent = async (req, res) => {
 }
 
 
+const logoutAgent = async(req, res) => {
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .json({success: true, message: "Logout successful"});
+}
+
+
 export{
     signUpAgent,
     logInAgent
