@@ -1,6 +1,7 @@
 import Agent from "../model/agent.model.js";
 import validator from "validator";
-import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 // controllers 
 // signUpAgent
@@ -28,6 +29,9 @@ const signUpAgent = async (req, res) => {
         return res.status(400).json({success: false, message: "Please provide a strong password"});
     }
 
+    // hash password
+    const hashedPassword = await bcrypt.hash(password,10);
+
     // check if agent already exists
     const existingAgent = await Agent.findOne({ email});
 
@@ -38,7 +42,7 @@ const signUpAgent = async (req, res) => {
     const agent = await Agent.create({
         name,
         email,
-        password
+        password: hashedPassword
     });
     // return response
     return res.status(201).json({success: true, message: "Agent created successfully", agent});
@@ -73,10 +77,36 @@ const logInAgent = async (req, res) => {
         return res.status(400).json({success: false, message: "Invalid password"});
     }
 
+    // genatete access token
+    const accessToken = jwt.sign(
+        {
+            _id: agent._id,
+            email: agent.email,
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    )
+
+    if(!accessToken) {
+        return res.status(500).json({success: false, message: "Failed to generate access token"});
+    }
+
+    // cokies options
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
     // return response
-    return res.status(200).json({success: true, message: "Login successful", agent});
+    return res.status(200)
+    .cookie("accessToken", accessToken, options)
+    .json({success: true, message: "Login successful", agent, accessToken});
 }
 
+
 export{
-    signUpAgent
+    signUpAgent,
+    logInAgent
 }
