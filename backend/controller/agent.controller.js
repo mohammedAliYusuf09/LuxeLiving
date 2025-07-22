@@ -165,11 +165,50 @@ const forgetPassword = async (req, res) => {
     return res.status(200).json({success: true, message: "OTP sent to your email", otp});
 }
 
+// validate otp 
+
+const validateOtp = async (req, res) => {
+    const {email , otp} = req.body;
+
+    if(!otp) {
+        return res.status(400).json({success: false, message: "Please provide OTP"})
+    }
+
+    if(!email) {
+        return res.status(400).json({success: false, message: "Please provide Email"})
+    }
+
+    // find agent by email 
+    const agent = await Agent.findOne({ email});
+    if(!agent) {
+        return res.status(400).json({success: false, message: "Agent does not exist"});
+    }
+
+    // check if agent updatedAt is within 10 minutes
+    const tenMinutes = 10 * 60 * 1000;
+    const currentTime = new Date().getTime();
+    const updatedTime = new Date(agent.updatedAt).getTime();
+    if (currentTime - updatedTime > tenMinutes) {
+        return res.status(400).json({success: false, message: "OTP has expired, please request a new OTP"});
+    }
+
+    // check if otp is valid
+    if(agent.resetPasswordOTP !== otp) {
+        return res.status(400).json({success: false, message: "Invalid OTP"});
+    }
+
+    // OTP is valid
+    return res.status(200).json({success: true, message: "OTP is valid"});
+
+}
+
+
 
 
 export{
     signUpAgent,
     logInAgent,
     logoutAgent,
-    forgetPassword
+    forgetPassword,
+    validateOtp
 }
