@@ -2,6 +2,8 @@ import Agent from "../model/agent.model.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import transporter from "../config/nodemailer.js";
+import { emailFormat } from "../config/constents.js";
 
 // controllers 
 // signUpAgent
@@ -120,7 +122,54 @@ const logoutAgent = async(req, res) => {
 }
 
 
+// forget password functionality
+
+const forgetPassword = async (req, res) => {
+    // get email fom request body
+    const {email} = req.body;
+
+    // vlaidate email
+    if(!email){
+         return res.status(400).json({success: false, message: "Please provide email fields"});
+    }
+
+    if(!validator.isEmail(email)){
+        return res.status(400).json({success: false, message: "Please provide a valid email"});
+    }
+
+    // chacke if email exists
+    const agent = await Agent.findOne({ email});
+
+    if(!agent){
+        return res.status(400).json({success: false, message: "Agent does not exist"});
+    }
+
+    // genarate otp
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // save otp to agent
+    agent.resetPasswordOTP = otp;
+    await agent.save();
+
+
+    const maileOptions = {
+    from: process.env.SENDER_EMAIL,
+    to: email,
+    subject: "Forget Password OTP",
+    html: emailFormat.replace('123456', otp)
+    }
+
+    await transporter.sendMail(maileOptions);
+
+    // return response
+    return res.status(200).json({success: true, message: "OTP sent to your email", otp});
+}
+
+
+
 export{
     signUpAgent,
-    logInAgent
+    logInAgent,
+    logoutAgent,
+    forgetPassword
 }

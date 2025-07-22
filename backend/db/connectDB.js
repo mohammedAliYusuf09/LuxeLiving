@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { DB_NAME } from "../constents.js";
+import { DB_NAME } from "../config/constents.js";
+
 
 const connectDB = async () => {
     try {
