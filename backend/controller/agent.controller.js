@@ -204,6 +204,40 @@ const validateOtp = async (req, res) => {
 }
 
 
+// save new password
+const saveNewPassword = async (req, res) => {
+    const {email} = req.agent;
+    const {newPassword} = req.body;
+
+    // validate new password
+    if(!newPassword) {
+        return res.status(400).json({success: false, message: "Please provide a new password"});
+    }
+
+    if(!validator.isStrongPassword(newPassword)) {
+         return res.status(400).json({success: false, message: "Please provide a String password"});
+    }
+
+    // find agent by email
+    const agent = await Agent.findOne({ email});
+    if(!agent) {
+         return res.status(400).json({success: false, message: "Agent does not exist"});
+    }
+
+    // hash new password
+    const hashedPassword = await bcrypt.hash(newPassword,10);
+
+    // update agent password
+    agent.password = hashedPassword;
+    agent.resetPasswordOTP = '';
+    await agent.save();
+
+    // return response
+    return res.status(200).json({success: true, message: "Password updated successfully"});
+
+}
+
+
 
 
 export{
@@ -211,5 +245,6 @@ export{
     logInAgent,
     logoutAgent,
     forgetPassword,
-    validateOtp
+    validateOtp,
+    saveNewPassword
 }
