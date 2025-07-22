@@ -237,6 +237,7 @@ const saveNewPassword = async (req, res) => {
 
 }
 
+<<<<<<< HEAD
 // reset password functionality
 
 const resetPassword = async (req, res) => {
@@ -275,6 +276,8 @@ const resetPassword = async (req, res) => {
     return res.status(200).json({success: true, message: "Password updated successfully"});                 
 }
 
+=======
+>>>>>>> c8aa585e3a1e2396f4ce33c5f9a270a993a67aa1
 
 
 
@@ -284,6 +287,10 @@ export{
     logoutAgent,
     forgetPassword,
     validateOtp,
+<<<<<<< HEAD
     saveNewPassword,
     resetPassword
+=======
+    saveNewPassword
+>>>>>>> c8aa585e3a1e2396f4ce33c5f9a270a993a67aa1
 }
