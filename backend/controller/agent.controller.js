@@ -168,7 +168,8 @@ const forgetPassword = async (req, res) => {
 // validate otp 
 
 const validateOtp = async (req, res) => {
-    const {email , otp} = req.body;
+    const {otp} = req.body;
+    const {email}  = req.agent;
 
     if(!otp) {
         return res.status(400).json({success: false, message: "Please provide OTP"})
