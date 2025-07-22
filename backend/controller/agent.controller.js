@@ -204,6 +204,78 @@ const validateOtp = async (req, res) => {
 }
 
 
+// save new password
+const saveNewPassword = async (req, res) => {
+    const {email} = req.agent;
+    const {newPassword} = req.body;
+
+    // validate new password
+    if(!newPassword) {
+        return res.status(400).json({success: false, message: "Please provide a new password"});
+    }
+
+    if(!validator.isStrongPassword(newPassword)) {
+         return res.status(400).json({success: false, message: "Please provide a String password"});
+    }
+
+    // find agent by email
+    const agent = await Agent.findOne({ email});
+    if(!agent) {
+         return res.status(400).json({success: false, message: "Agent does not exist"});
+    }
+
+    // hash new password
+    const hashedPassword = await bcrypt.hash(newPassword,10);
+
+    // update agent password
+    agent.password = hashedPassword;
+    agent.resetPasswordOTP = '';
+    await agent.save();
+
+    // return response
+    return res.status(200).json({success: true, message: "Password updated successfully"});
+
+}
+
+// reset password functionality
+
+const resetPassword = async (req, res) => {
+    const {oldPassword, newPassword} = req.body;
+    const {email} = req.agent;
+
+    // chack fild are not empty
+    if(!oldPassword || !newPassword) {
+        return res.status(400).json({success: false, message: "Please provide all fields"});
+    }
+
+    // validate new password
+    if(!validator.isStrongPassword(newPassword)){
+        return res.status(400).json({success: false, message: "Please provide a strong password"});
+    }
+
+    // find agent by email
+    const agent = await Agent.findOne({ email});
+    if(!agent) {
+        return res.status(400).json({success: false, message: "Agnet does not exist"});
+    }
+
+    // compare old password
+    const isPasswordValid = await bcrypt.compare(oldPassword, agent.password);
+
+    if(!isPasswordValid) {
+        return res.status(400).json({success: false, message: "Password is incorrect"});
+    }
+
+    // hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    agent.password = hashedPassword;
+    await agent.save();
+
+    // return response
+    return res.status(200).json({success: true, message: "Password updated successfully"});                 
+}
+
+
 
 
 export{
@@ -211,5 +283,7 @@ export{
     logInAgent,
     logoutAgent,
     forgetPassword,
-    validateOtp
+    validateOtp,
+    saveNewPassword,
+    resetPassword
 }

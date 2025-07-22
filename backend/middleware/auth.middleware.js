@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import Agent from "../model/agent.model.js"
 
-export const verifyAgent = async(req, _, next) => {
+export const verifyAgent = async(req, res, next) => {
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
         
