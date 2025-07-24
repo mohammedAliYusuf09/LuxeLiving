@@ -52,20 +52,20 @@ const signUpAgent = async (req, res) => {
 
 const logInAgent = async (req, res) => {
     // get all fields
-    const {email, password} = req.body;
+    const { password} = req.body;
 
     // validate all fields
-    if (!email || !password) {
-        return res.status(400).json({success: false, message: "Please provide all fields"});
+    if (!password) {
+        return res.status(400).json({success: false, message: "Please provide password"});
     }
 
-    // validate email
-    if (!validator.isEmail(email)) {
-        return res.status(400).json({success: false, message: "Please provide a valid email"});
-    }
+    // // validate email
+    // if (!validator.isEmail(email)) {
+    //     return res.status(400).json({success: false, message: "Please provide a valid email"});
+    // }
 
     // check if agent exists
-    const agent = await Agent.findOne({ email });
+    const agent = await Agent.find();
 
 
     if (!agent) {
@@ -73,7 +73,7 @@ const logInAgent = async (req, res) => {
     }
 
     // check password
-    const isPasswordValid = await bcrypt.compare(password, agent.password);
+    const isPasswordValid = await bcrypt.compare(password, agent[0].password);
 
     if (!isPasswordValid) {
         return res.status(400).json({success: false, message: "Invalid password"});
@@ -82,8 +82,8 @@ const logInAgent = async (req, res) => {
     // genatete access token
     const accessToken = jwt.sign(
         {
-            _id: agent._id,
-            email: agent.email,
+            _id: agent[0]._id,
+            email: agent[0].email,
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
@@ -126,16 +126,8 @@ const logoutAgent = async(req, res) => {
 
 const forgetPassword = async (req, res) => {
     // get email fom request body
-    const {email} = req.body;
+    const {email} = req.agent;
 
-    // vlaidate email
-    if(!email){
-         return res.status(400).json({success: false, message: "Please provide email fields"});
-    }
-
-    if(!validator.isEmail(email)){
-        return res.status(400).json({success: false, message: "Please provide a valid email"});
-    }
 
     // chacke if email exists
     const agent = await Agent.findOne({ email});
@@ -286,6 +278,5 @@ export{
     forgetPassword,
     validateOtp,
     saveNewPassword,
-    resetPassword,
-    saveNewPassword
+    resetPassword
 }
