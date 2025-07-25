@@ -98,7 +98,8 @@ const logInAgent = async (req, res) => {
     // cokies options
     const options = {
         httpOnly: true,
-        secure: true
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
     }
 
     // return response
