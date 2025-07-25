@@ -6,7 +6,9 @@ import { useAuthStore } from "../authStore";
 function SecurityPage() {
   const [password, setPassword] = useState("");
 
-  const { setIsAuthenticated, setUser }= useAuthStore();
+  const { setIsAuthenticated, setUser, setItemAuthWithExpiry }= useAuthStore();
+
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -22,6 +24,7 @@ function SecurityPage() {
       console.log("Login success:", response.data.agent);
 
       // Example: update Zustand or redirect
+      setItemAuthWithExpiry('setIsAuthenticated', true, 3600000 * 24);
       setIsAuthenticated(true);
       // useAuthStore.getState().setIsAuthenticated(true);
       setUser(response.data.agent)
