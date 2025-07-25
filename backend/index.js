@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import connectDB from './db/connectDB.js';
 import { agentRouter } from './router/agent.router.js';
+import propertyRouter from './router/property.route.js';
 
 dotenv.config(
     {
@@ -28,7 +29,8 @@ app.get('/', (req, res) => {
     res.send('Hello server is running');
 });
 
-app.use('/', agentRouter)
+app.use('/agent', agentRouter)
+app.use('/property', propertyRouter)
 
 app.listen(port,()=> {
     connectDB();
