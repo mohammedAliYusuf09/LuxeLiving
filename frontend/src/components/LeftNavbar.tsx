@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { LuHouse } from "react-icons/lu";
 import { FaBlog } from "react-icons/fa6";
 import { FiMessageSquare } from "react-icons/fi";
-import { CiSettings } from "react-icons/ci";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const LeftNavbar = () => {
   return (
@@ -31,7 +31,7 @@ const LeftNavbar = () => {
         </NavLink>
         <NavLink to="/settings" className="hover:text-blue-400 p-3 rounded-md text-gray-200">
           <span className="flex items-center gap-2">
-          <CiSettings />
+          <IoSettingsOutline />
           Settings
           </span>
         </NavLink>
