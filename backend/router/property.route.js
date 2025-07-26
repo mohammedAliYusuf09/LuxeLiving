@@ -8,7 +8,7 @@ const propertyRouter = express.Router();
 
 //// add property
 
-propertyRouter.post('/add-property', verifyAgent, upload.files([{name: 'images', maxCount: 6}]), addProperty);
+propertyRouter.post('/add-property', verifyAgent, addProperty);
 
 //// get all properties with filters
 

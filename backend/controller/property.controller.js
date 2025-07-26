@@ -15,24 +15,8 @@ const addProperty = async (req, res) => {
         return res.status(400).json({ success: false, message: "All fields are required" });
     }
 
-    // get images from request
-    const images = req.files.images;
-
-    if (!images || images.length === 0) {
-        return res.status(400).json({ success: false, message: "At least one image is required" });
-    }
-
-    // get images paths
-    const imagePaths = Array.isArray(images)
-      ? images.map((file) => file.path)
-      : [images.path];
-
-    // upload images to cloudinary  
-    const uploadedImages = await Promise.all(
-        imagePaths.map((path) => uploadOnCloudinary(path))
-    );
-
     
+
 }
 
 
