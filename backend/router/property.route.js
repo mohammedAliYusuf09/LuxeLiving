@@ -1,4 +1,5 @@
 import express from 'express';
+import { upload } from '../middleware/multer.middleware.js';
 import { verifyAgent } from '../middleware/auth.middleware.js';
 import 
 { 
@@ -7,7 +8,8 @@ getAllProperties,
 getPropertyById, 
 updatePropertyById, 
 deletePropertyById ,
-changeStatusById
+changeStatusById,
+uploadImage
 } from '../controller/property.controller.js';
 
 const propertyRouter = express.Router();
@@ -32,6 +34,11 @@ propertyRouter.delete('/delete-property/:id', verifyAgent, deletePropertyById);
 
 //// change property status by id
 propertyRouter.put('/change-status/:id', verifyAgent, changeStatusById);
+
+//// upload image on cloudnary
+propertyRouter.post('/upload-image', verifyAgent, upload.single('image'), uploadImage);
+
+
 
 
 export default propertyRouter;

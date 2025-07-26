@@ -1,5 +1,6 @@
 //// create property
 import { Property } from "../model/property.model.js";
+import {uploadOnCloudinary} from "../config/cloudinary.js"
 
 const addProperty = async (req, res) => {
   // chack if uset is authenticated
@@ -302,6 +303,36 @@ const changeStatusById = async (req, res) => {
       .status(500)
       .json({ success: false, message: "Internal server error" });
   }
+}
+
+const uploadImage = async (req, res) => {
+    const { email } = req.agent;
+    const  image  = req.file;
+    if (!email) {
+        return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+    if (!image) {
+        return res.status(401).json({ success: false, message: "Image file is required" });
+    }
+    const imagePath = image.path;
+    try {
+    // upload on cloudnary
+    const {url} = await uploadOnCloudinary(imagePath);
+    // return respons
+        return res
+        .status(200)
+        .json({ success: true, message: "Image uploaded on cloudinary successfully", url});
+    
+    } catch (error) {
+    console.error("Error uploading image", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+
+    
+
+
 
 }
 
@@ -311,5 +342,6 @@ export {
   getPropertyById,
   updatePropertyById,
   deletePropertyById,
-  changeStatusById
+  changeStatusById,
+  uploadImage
 };
