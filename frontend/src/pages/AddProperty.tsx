@@ -368,7 +368,17 @@ function AddProperty() {
           {/* Placeholder previews */}
           {
             form.images?.map((item, ind) => (
-              <img key={ind} src={item} className="w-20 h-20 bg-gray-800 rounded border border-gray-700" />
+              <img
+                key={ind}
+                src={item}
+                className="w-20 h-20 bg-gray-800 rounded border border-gray-700 cursor-pointer"
+                onClick={() => {
+                  setForm(prev => ({
+                    ...prev,
+                    images: prev.images.filter((_, i) => i !== ind)
+                  }));
+                }}
+              />
             ))
           }
         </div>
