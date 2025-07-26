@@ -5,14 +5,14 @@ import { verifyAgent } from '../middleware/auth.middleware.js';
 
 const agentRouter = express.Router();
 
-agentRouter.post('/api/v1/signup', signUpAgent);
-agentRouter.post('/api/v1/login', logInAgent);
-agentRouter.post('/api/v1/logout', logoutAgent);
-agentRouter.post('/api/v1/send-forget-password-otp', verifyAgent, forgetPassword);
-agentRouter.post('/api/v1/validate-otp', verifyAgent, validateOtp);
-agentRouter.post('/api/v1/save-new-password', verifyAgent, saveNewPassword);
+agentRouter.post('/signup', signUpAgent);
+agentRouter.post('/login', logInAgent);
+agentRouter.post('/logout', logoutAgent);
+agentRouter.post('/send-forget-password-otp', verifyAgent, forgetPassword);
+agentRouter.post('/validate-otp', verifyAgent, validateOtp);
+agentRouter.post('/save-new-password', verifyAgent, saveNewPassword);
 
-agentRouter.post('/api/v1/reset-password', verifyAgent, resetPassword);
+agentRouter.post('/reset-password', verifyAgent, resetPassword);
 
 
 export {

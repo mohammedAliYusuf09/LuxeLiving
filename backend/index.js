@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
     res.send('Hello server is running');
 });
 
-app.use('/agent', agentRouter)
-app.use('/property', propertyRouter)
+app.use('/api/v1/agent', agentRouter)
+app.use('/api/v1/property', propertyRouter)
 
 app.listen(port,()=> {
     connectDB();
