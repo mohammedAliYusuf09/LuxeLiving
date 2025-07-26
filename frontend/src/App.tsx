@@ -1,12 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./authStore";
 import SecurityPage from "./pages/SecurityPage";
-import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import Layout from "./pages/Layout";
 import Blogs from "./pages/Blogs";
 import Propertys from "./pages/Propertys";
 import Messages from "./pages/Messages";
+import AddProperty from "./pages/AddProperty";
 
 function App() {
   const { getItemAuthWithExpiry } = useAuthStore();
@@ -23,8 +23,9 @@ function App() {
       {/* Protected Routes with Layout */}
       {isAuth && (
         <Route element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Propertys />} />
           <Route path="/propertys" element={<Propertys />} />
+          <Route path="/propertys/add-property" element={<AddProperty />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/settings" element={<Settings />} />

@@ -308,6 +308,7 @@ const changeStatusById = async (req, res) => {
 const uploadImage = async (req, res) => {
     const { email } = req.agent;
     const  image  = req.file;
+
     if (!email) {
         return res.status(401).json({ success: false, message: "Unauthorized" });
     }
