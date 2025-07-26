@@ -4,7 +4,26 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 
 function AddProperty() {
 
-    const [form, setForm] = useState({
+    interface PropertyForm {
+        title: string;
+        summary: string;
+        description: string;
+        propertyType: string;
+        price: string;
+        location: string;
+        size: string;
+        lotSize: string;
+        bedrooms: string;
+        bathrooms: string;
+        parkingSpaces: string;
+        yearBuilt: string;
+        status: string;
+        lat: string;
+        lng: string;
+        images: string[];
+    }
+
+    const [form, setForm] = useState<PropertyForm>({
         title: "",
         summary: "",
         description: "",
@@ -25,7 +44,9 @@ function AddProperty() {
 
     const [image, setImage] = useState<FileList | null>(null);
 
-    // const [url, setUrl] = useState<string | null>(null);
+    console.log(form.images);
+    
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -44,8 +65,6 @@ function AddProperty() {
             setImage(e.target.files);
     }
 
-    console.log(image);
-
    const uploadImageOnCloudnary = async (image: File) => {
     try {
         const formData = new FormData();
@@ -63,6 +82,12 @@ function AddProperty() {
         );
 
     console.log("Uploaded Successfully", response.data);
+    setForm(prev => ({
+            ...prev,
+            images: [...prev.images,  response.data.url,]
+        }));
+
+    setImage(null);    
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       console.error(
