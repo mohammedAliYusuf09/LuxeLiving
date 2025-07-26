@@ -1,6 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { ClipLoader } from "react-spinners";
+
+// const override: CSSProperties = {
+//   display: "block",
+//   margin: "0 auto",
+//   borderColor: "red",
+// };
 
 function AddProperty() {
 
@@ -43,11 +50,12 @@ function AddProperty() {
     });
 
     const [image, setImage] = useState<FileList | null>(null);
+    const [formLoading, setformLoading] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
-    console.log(form.images);
-    
 
-
+  
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setForm(prev => ({
@@ -56,9 +64,60 @@ function AddProperty() {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(form);
+        setformLoading(true);
+        setError(null);
+
+        try {
+          const response = await axios.post(
+            "http://localhost:3000/api/v1/property/add-property",
+            form, 
+            {
+            headers: {
+            "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        }
+          );
+          console.log(response.data);
+          setformLoading(false);
+          setForm({
+            title: "",
+            summary: "",
+            description: "",
+            propertyType: "",
+            price: "",
+            location: "",
+            size: "",
+            lotSize: "",
+            bedrooms: "",
+            bathrooms: "",
+            parkingSpaces: "",
+            yearBuilt: "",
+            status: "",
+            lat: "",
+            lng: "",
+            images: [],
+          });
+        } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Upload failed:",
+        error.response?.data?.message || error.message
+      );
+       setError(error.response?.data?.message || error.message);
+      setformLoading(false);
+    } else if (error instanceof Error) {
+      console.error("Upload failed:", error.message);
+      setError(error.message);
+      setformLoading(false);
+    } else {
+      console.error("Upload failed:", error);
+      setError(error instanceof Error ? error.message : "An unknown error occurred");
+      setformLoading(false);
+    }
+  }
     };
 
     const handelImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +126,8 @@ function AddProperty() {
 
    const uploadImageOnCloudnary = async (image: File) => {
     try {
+        setError(null);
+        setLoading(true)
         const formData = new FormData();
         formData.append("image", image); // key must match backend field name
 
@@ -86,7 +147,7 @@ function AddProperty() {
             ...prev,
             images: [...prev.images,  response.data.url,]
         }));
-
+    setLoading(false)    
     setImage(null);    
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
@@ -94,24 +155,24 @@ function AddProperty() {
         "Upload failed:",
         error.response?.data?.message || error.message
       );
+       setError(error.response?.data?.message || error.message);
+      setLoading(false);
     } else if (error instanceof Error) {
       console.error("Upload failed:", error.message);
+      setError(error.message);
+      setLoading(false);
     } else {
       console.error("Upload failed:", error);
+      setError(error instanceof Error ? error.message : "An unknown error occurred");
+      setLoading(false);
     }
   }
 };
-    
-
-    // selec image
-    // store image in a state 
-    // send a server request to upload on cloudnary and get result 
-    // store result in a state 
-    // show others boxes
 
   return (
     <form className="p-6 rounded-lg text-white space-y-6" onSubmit={handleSubmit}>
         <h3 className="text-xl font-semibold">Add Property</h3>
+        {error && <p>{error}</p>}
       {/* Title, Summary, Description */}
       <div className="space-y-4">
         <input
@@ -289,16 +350,31 @@ function AddProperty() {
                 type="button"
                 onClick={() => image && uploadImageOnCloudnary(image[0])}
                 className="w-20 h-20 bg-gray-800 border border-dashed border-gray-600 rounded flex items-center justify-center text-2xl cursor-pointer"
-                ><FaCloudUploadAlt /></button>) : (
+                >{isLoading 
+                  ? 
+                <ClipLoader
+                  color={'#ffffff'}
+                  loading={isLoading}
+                  /> 
+                  : 
+                  <FaCloudUploadAlt />}</button>) 
+                  : 
+                  (
                     <input 
-          onChange={handelImageChange}
-          type="file" placeholder="+" className="w-20 h-20 bg-gray-800 border border-dashed border-gray-600 rounded flex items-center justify-center text-2xl" />
+                    onChange={handelImageChange}
+                    type="file" placeholder="+" className="w-20 h-20 bg-gray-800 border border-dashed border-gray-600 rounded flex items-center justify-center text-2xl" />
                 )
             }
           {/* Placeholder previews */}
-          <div className="w-20 h-20 bg-gray-800 rounded border border-gray-700" />
-          <div className="w-20 h-20 bg-gray-800 rounded border border-gray-700" />
+          {
+            form.images?.map((item, ind) => (
+              <img key={ind} src={item} className="w-20 h-20 bg-gray-800 rounded border border-gray-700" />
+            ))
+          }
         </div>
+        {
+          error && <p className="text-red-300">{error}</p>
+        }
       </div>
 
       {/* Submit Button */}
@@ -306,7 +382,13 @@ function AddProperty() {
         <button 
         onSubmit={handleSubmit}
         type="submit" className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded font-semibold">
-          Submit Property
+          {formLoading 
+          ? 
+          <ClipLoader
+            color={'#ffffff'}
+            loading={formLoading}
+            /> 
+          :"Submit Property"}
         </button>
       </div>
     </form>

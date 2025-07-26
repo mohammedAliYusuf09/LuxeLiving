@@ -3,9 +3,9 @@ import LeftNavbar from '../components/LeftNavbar';
 
 const Layout = () => {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <LeftNavbar />
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4  overflow-auto">
         <Outlet />
       </div>
     </div>

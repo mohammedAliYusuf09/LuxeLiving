@@ -54,8 +54,12 @@ const propertySchema = new mongoose.Schema({
         required: true,
         enum: ['Available', 'Sold', 'Pending']
     },
-    coordinates :  {
-        type: [Number],
+    lat: {
+        type: String,
+        required: true
+    },
+    lng: {
+        type: String,
         required: true
     },
     images : {

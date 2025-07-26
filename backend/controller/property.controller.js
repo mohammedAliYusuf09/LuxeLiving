@@ -25,30 +25,38 @@ const addProperty = async (req, res) => {
     parkingSpaces,
     yearBuilt,
     status,
-    coordinates,
+    lat,
+    lng,
     images,
   } = req.body;
+  
 
-  if (
-    !title ||
-    !summary ||
-    !description ||
-    !propertyType ||
-    !price ||
-    !location ||
-    !size ||
-    !bedrooms ||
-    !bathrooms ||
-    !parkingSpaces ||
-    !yearBuilt ||
-    !status ||
-    !coordinates ||
-    !images
-  ) {
-    return res
-      .status(400)
-      .json({ success: false, message: "All fields are required" });
+  if (!title) return res.status(3000).json({ success: false, message: "Title is required" });
+  if (!summary) return res.status(3000).json({ success: false, message: "Summary is required" }) ;
+  if (!description) return res.status(3000).json({ success: false, message: "Description is required" }) ;
+  if (!propertyType) return res.status(3000).json({ success: false, message: "Property type is required"}) ;
+  if (!['House', 'Apartment', 'Condo', 'Townhouse', 'Villa'].includes(propertyType)) {
+    return res.status(3000).json({ success: false, message: "Invalid property type" });
   }
+  if (!price || isNaN(price)) return res.status(3000).json({ success: false, message: "Valid price is required" }) ;
+  if (!location) return res.status(3000).json({ success: false, message: "Location is required" }) ;
+  if (!size) return res.status(3000).json({ success: false, message: "Size is required" }) ;
+  if (!bedrooms || isNaN(bedrooms)) return res.status(3000).json({ success: false, message: "Valid number of bedrooms is required" }) ;
+  if (!bathrooms || isNaN(bathrooms)) return res.status(3000).json( { success: false, message: "Valid number of bathrooms is required" });
+  if (!parkingSpaces) return res.status(3000).json({ success: false, message: "Parking spaces are required" }) ;
+  if (!yearBuilt || isNaN(yearBuilt)) return res.status(3000).json({ success: false, message: "Valid year built is required" }) ;
+  if (!status) return res.status(3000).json({ success: false, message: "Status is required" }) ;
+  if (!['Available', 'Sold', 'Pending'].includes(status)) {
+    return res.status(3000).json({ success: false, message: "Invalid status" }) ;
+  }
+  if (!lat) return res.status(3000).json({ success: false, message: "Latitude is required" }) ;
+  if (!lng) return res.status(3000).json( { success: false, message: "Longitude is required" });
+  if (!Array.isArray(images) || images.length === 0) {
+    return res.status(3000).json( { success: false, message: "At least one image is required" });
+  }
+
+   console.log(req.body.status);
+
 
   /// create a new property
   const newProperty = {
@@ -65,7 +73,8 @@ const addProperty = async (req, res) => {
     parkingSpaces,
     yearBuilt,
     status,
-    coordinates,
+    lat,
+    lng,
     images,
   };
 
@@ -83,7 +92,7 @@ const addProperty = async (req, res) => {
   } catch (error) {
     console.error("Error adding property:", error);
     return res
-      .status(500)
+      .status(400)
       .json({ success: false, message: "Internal server error" });
   }
 };
