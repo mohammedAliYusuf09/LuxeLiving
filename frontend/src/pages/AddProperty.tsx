@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
+import { ToastContainer, toast } from 'react-toastify';
 
 // const override: CSSProperties = {
 //   display: "block",
@@ -54,6 +55,8 @@ function AddProperty() {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    const notify = () => toast("Peoperty Successfully Added");
+
 
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -100,6 +103,7 @@ function AddProperty() {
             lng: "",
             images: [],
           });
+          notify();
         } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       console.error(
@@ -400,6 +404,10 @@ function AddProperty() {
             /> 
           :"Submit Property"}
         </button>
+        <ToastContainer 
+        position= "bottom-center"
+        theme="dark"
+        />
       </div>
     </form>
   );

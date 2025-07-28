@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 
 const LoadingPropertyCard: React.FC = () => {
   return (
+    
     <div className="max-h-48 flex items-center gap-6 bg-[#21222D] p-2 rounded-md">
       <div className="relative w-48 h-40 rounded-md overflow-hidden">
         {/* Layer 1: Red → Yellow */}

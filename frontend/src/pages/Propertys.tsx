@@ -6,7 +6,8 @@ import PropertysText from "../components/PropertysText";
 import axios from "axios";
 
 export interface property {
-  image: string;
+  _id: string,
+  images: [string];
   title: string;
   bedrooms: number;
   bathrooms: number;
@@ -14,19 +15,6 @@ export interface property {
   price: string;
   status: string;
 }
-
-// You can keep this for initial development/testing if you want a default,
-// but it won't be used once you fetch data.
-// const propertyObj: property = {
-//   image:
-//     "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?_gl=1*dt1426*_ga*MTY0NDQyMTMzNS4xNzUyMjE2OTM1*_ga_8JE65Q40S6*czE3NTM1ODkzMzIkbzMkZzEkdDE3NTM1ODkzMzUkajU3JGwwJGgw",
-//   title: "$100k 2023 CONSTRUCTION IN MID COUNTRY GREENWICH",
-//   bedrooms: 4,
-//   bathrooms: 4,
-//   size: "2134 arc",
-//   price: "100 K",
-//   status: "For sale",
-// };
 
 function Propertys() {
   const [properties, setProperties] = useState<property[]>([]); // State to store fetched properties
@@ -75,24 +63,24 @@ function Propertys() {
 
       {/* Conditional rendering based on loading, error, and data */}
       {loading ? (
+        <div className="flex flex-col gap-4 mt-4"> 
         <LoadingPropertyCard />
+        <LoadingPropertyCard />
+        <LoadingPropertyCard />
+        </div>
+        
       ) : error ? (
         <div className="text-red-500 mt-4 text-center">{error}</div>
       ) : properties.length > 0 ? (
         <div className="flex flex-col gap-4 mt-4">
           {properties.map((propertyItem) => (
-            <PropertyCard key={propertyItem.title + propertyItem.price} propertyItem={propertyItem} />
+            <PropertyCard key={propertyItem._id} propertyItem={propertyItem} />
             // You might need a more unique key if title+price isn't guaranteed unique
           ))}
         </div>
       ) : (
         <div className="mt-4 text-center text-gray-600">No properties found.</div>
       )}
-
-      {/* You can remove these if you're using the conditional rendering above */}
-      {/* <PropertyCard propertyItem={propertyObj} /> */}
-      {/* <div className="mt-2">If loading</div> */}
-      {/* <LoadingPropertyCard /> */}
     </div>
   );
 }

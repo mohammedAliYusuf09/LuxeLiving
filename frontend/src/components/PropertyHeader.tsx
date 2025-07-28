@@ -10,7 +10,7 @@ function PropertyHeader() {
         to={'/propertys/add-property'} >
           Add Property
         </Link>
-      </div>
+    </div>
   )
 }
 
