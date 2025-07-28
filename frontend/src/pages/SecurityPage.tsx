@@ -5,6 +5,7 @@ import { useAuthStore } from "../authStore";
 
 function SecurityPage() {
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const { setIsAuthenticated, setUser, setItemAuthWithExpiry }= useAuthStore();
 
@@ -34,10 +35,13 @@ function SecurityPage() {
           "Login failed:",
           error.response?.data?.message || error.message
         );
+         setError(error.response?.data?.message || error.message)
       } else if (error instanceof Error) {
         console.error("Login failed:", error.message);
+        setError(error.message);
       } else {
         console.error("Login failed:", error);
+        setError("Unknown Error apiar : Login failed")
       }
     }
   };
@@ -45,7 +49,9 @@ function SecurityPage() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="flex flex-col gap-2">
-        <p className="text-center text-red-400">Password is incorrect</p>
+        {
+          error && <p className="text-center text-red-400">{error}</p>
+        }
         <form
           className="flex bg-yellow-50 rounded-md shadow-md p-[2px]"
           onSubmit={handleSubmit}
