@@ -99,6 +99,7 @@ const addProperty = async (req, res) => {
 // get all properties with filters
 const getAllProperties = async (req, res) => {
   try {
+    console.log('request is here');
     // chack if uset is authenticated
 
     const { email } = req.agent;
@@ -106,6 +107,8 @@ const getAllProperties = async (req, res) => {
     if (!email) {
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
+    
+    
 
     const {
       propertyType,
@@ -131,7 +134,9 @@ const getAllProperties = async (req, res) => {
       if (maxPrice) filter.price.$lte = Number(maxPrice);
     }
 
-    const properties = await Property.find(filter);
+    const properties = await Property.find(filter).select(
+    "-summary -description -propertyType -location -lotSize -parkingSpaces -yearBuilt -lat -lng"
+    );
 
     return res.status(200).json({
       success: true,
