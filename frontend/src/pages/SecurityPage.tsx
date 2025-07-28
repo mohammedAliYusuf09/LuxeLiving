@@ -19,6 +19,7 @@ function SecurityPage() {
     e.preventDefault();
 
     try {
+      setError(null);
       axios.defaults.withCredentials = true;
       const response = await axios.post("http://localhost:3000/api/v1/agent/login", { password });
       // Assuming the response contains a token or auth status
