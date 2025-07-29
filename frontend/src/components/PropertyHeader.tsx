@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import FilterButton from './FilterButton'
 
+
 function PropertyHeader() {
   return (
     <div className="flex justify-between items-center">

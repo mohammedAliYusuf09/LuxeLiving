@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; // Import useState
+import { useCallback, useEffect, useState } from "react"; 
 import LoadingPropertyCard from "../components/LoadingPropertyCard";
 import PropertyCard from "../components/PropertyCard";
 import PropertyHeader from "../components/PropertyHeader";
@@ -21,40 +21,36 @@ function Propertys() {
   const [loading, setLoading] = useState<boolean>(true); // State for loading status
   const [error, setError] = useState<string | null>(null); // State for error messages
 
-  const getProperty = async () => {
+   const getProperty = useCallback(async () => {
     try {
-      setLoading(true); // Set loading to true before the request
-      setError(null); // Clear any previous errors
-      
-      axios.defaults.withCredentials= true;
-      
-      
-      const response = await axios.get('http://localhost:3000/api/v1/property/all-properties');
-      // Assuming your API returns an array of property objects directly under response.data
-      setProperties(response.data.data); // Adjust this based on your actual API response structure
-      console.log(response.data.data); // Log the actual data
+      setLoading(true);
+      setError(null);
+      axios.defaults.withCredentials = true;
+      const response = await axios.get(
+       `http://localhost:3000/api/v1/property/all-properties`);
+
+      setProperties(response.data.data);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        console.error(
-          "Login failed:",
-          error.response?.data?.message || error.message
-        );
-         setError(error.response?.data?.message || error.message)
+        console.error("Login failed:", error.response?.data?.message || error.message);
+        setError(error.response?.data?.message || error.message);
       } else if (error instanceof Error) {
         console.error("Login failed:", error.message);
         setError(error.message);
       } else {
         console.error("Login failed:", error);
-        setError("Unknown Error apiar : Login failed")
+        setError("Unknown Error occurred: Login failed");
       }
-    }finally {
-      setLoading(false); // Set loading to false after the request (success or failure)
+    } finally {
+      setLoading(false);
     }
-  };
+  }, []); // Dependency: `filter`
+
+  // Update the search params
 
   useEffect(() => {
     getProperty();
-  }, []); // Empty dependency array means this runs once on mount
+  },[getProperty]); // Empty dependency array means this runs once on mount
 
   return (
     <div>

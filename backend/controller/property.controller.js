@@ -99,7 +99,6 @@ const addProperty = async (req, res) => {
 // get all properties with filters
 const getAllProperties = async (req, res) => {
   try {
-    console.log('request is here');
     // chack if uset is authenticated
 
     const { email } = req.agent;
@@ -108,8 +107,6 @@ const getAllProperties = async (req, res) => {
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
     
-    
-
     const {
       propertyType,
       status,
@@ -127,6 +124,8 @@ const getAllProperties = async (req, res) => {
     if (location) filter.location = { $regex: location, $options: "i" }; // case-insensitive partial match
     if (bedrooms) filter.bedrooms = Number(bedrooms);
     if (bathrooms) filter.bathrooms = Number(bathrooms);
+    if (minPrice) filter.minPrice = Number(minPrice);
+    if (maxPrice) filter.maxPrice = Number(maxPrice);
 
     if (minPrice || maxPrice) {
       filter.price = {};
