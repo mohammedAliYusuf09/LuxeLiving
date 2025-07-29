@@ -1,8 +1,27 @@
 import { FaFilter } from "react-icons/fa";
 import { motion } from "motion/react";
+import type { filterProps } from "../pages/Propertys";
+import { useState } from "react";
 
+interface PropertyHeaderProps {
+  onChange: (filter: filterProps) => void;
+  filter: filterProps;
+}
 
-function FilterButton() {
+function FilterButton({ onChange, filter }: PropertyHeaderProps) {
+  const [localFilter, setLocalFilter] = useState(filter);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setLocalFilter(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleDone = () => {
+    onChange(localFilter);
+  };
 
   return (
     <>
@@ -23,6 +42,7 @@ function FilterButton() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <select
           name="propertyType"
+          value={localFilter.propertyType} onChange={handleChange}
           className="bg-gray-800 p-3 rounded border border-gray-700"
           >
           <option value="">Property Type*</option>
@@ -37,6 +57,7 @@ function FilterButton() {
             <input
               type="text"
               name="location"
+              value={localFilter.location} onChange={handleChange}
               placeholder="Location"
               className="bg-gray-800 p-3 rounded border border-gray-700"
             />
@@ -44,6 +65,7 @@ function FilterButton() {
 
             <select
               name="status"
+              value={localFilter.status} onChange={handleChange}
               className="bg-gray-800 p-3 rounded border border-gray-700"
             >
               <option value="">Status</option>
@@ -51,16 +73,13 @@ function FilterButton() {
               <option value="Sold">Sold</option>
               <option value="Pending">Pending</option>
             </select>
-
-
-          
-
           
             {/* Bedrooms */}
             <input
               type="number"
               name="bedrooms"
               placeholder="Bedrooms"
+              value={localFilter.bedrooms} onChange={handleChange}
               className="bg-gray-800 p-3 rounded border border-gray-700"
             />
 
@@ -69,6 +88,7 @@ function FilterButton() {
               type="number"
               name="bathrooms"
               placeholder="Bathrooms"
+              value={localFilter.bathrooms} onChange={handleChange}
               className="bg-gray-800 p-3 rounded border border-gray-700"
             />
 
@@ -76,6 +96,7 @@ function FilterButton() {
               type="number"
               name="min-price"
               placeholder="Min Price"
+              value={localFilter.minPrice} onChange={handleChange}
               className="bg-gray-800 p-3 rounded border border-gray-700"
             />
 
@@ -83,10 +104,12 @@ function FilterButton() {
               type="number"
               name="max-price"
               placeholder="Max Price"
+              value={localFilter.maxPrice} onChange={handleChange}
               className="bg-gray-800 p-3 rounded border border-gray-700"
             />
 
             <button 
+            onClick={handleDone}
             className="bg-blue-600 rounded-sm cursor-pointer hover:"
             >Done</button>
           </div>

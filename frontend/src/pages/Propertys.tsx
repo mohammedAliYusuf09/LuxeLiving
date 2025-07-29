@@ -16,18 +16,41 @@ export interface property {
   status: string;
 }
 
+export interface filterProps {
+  propertyType : string,
+  location: string,
+  status: string,
+  bedrooms: string,
+  bathrooms: string,
+  minPrice: string,
+  maxPrice: string,
+}
+
 function Propertys() {
   const [properties, setProperties] = useState<property[]>([]); // State to store fetched properties
   const [loading, setLoading] = useState<boolean>(true); // State for loading status
   const [error, setError] = useState<string | null>(null); // State for error messages
+
+  const [filter, setFilter] = useState<filterProps>({
+  propertyType: "",
+  location: "",
+  status: "",
+  bedrooms: "",
+  bathrooms: "",
+  minPrice: "",
+  maxPrice: ""
+  });
 
    const getProperty = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       axios.defaults.withCredentials = true;
-      const response = await axios.get(
-       `http://localhost:3000/api/v1/property/all-properties`);
+      const response = await axios.get(`http://localhost:3000/api/v1/property/all-properties`,
+        {
+        params: filter,
+        }
+      );
 
       setProperties(response.data.data);
     } catch (error: unknown) {
@@ -44,7 +67,7 @@ function Propertys() {
     } finally {
       setLoading(false);
     }
-  }, []); // Dependency: `filter`
+  }, [filter]); // Dependency: `filter`
 
   // Update the search params
 
@@ -54,7 +77,7 @@ function Propertys() {
 
   return (
     <div>
-      <PropertyHeader />
+      <PropertyHeader filter={filter} onChange={setFilter}/>
       <PropertysText />
 
       {/* Conditional rendering based on loading, error, and data */}
