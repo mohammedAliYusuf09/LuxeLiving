@@ -124,9 +124,7 @@ const getAllProperties = async (req, res) => {
     if (location) filter.location = { $regex: location, $options: "i" }; // case-insensitive partial match
     if (bedrooms) filter.bedrooms = Number(bedrooms);
     if (bathrooms) filter.bathrooms = Number(bathrooms);
-    if (minPrice) filter.minPrice = Number(minPrice);
-    if (maxPrice) filter.maxPrice = Number(maxPrice);
-
+    
     if (minPrice || maxPrice) {
       filter.price = {};
       if (minPrice) filter.price.$gte = Number(minPrice);

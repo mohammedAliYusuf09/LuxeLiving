@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom'
 import FilterButton from './FilterButton'
-// interface PropertyHeaderProps {
-//   onChange: (filter: filterProps) => void;
-//   filter: filterProps;
-// }
+import type { filterProps } from '../pages/Propertys';
+interface PropertyHeaderProps {
+  onChange: <K extends keyof filterProps>(key: K, value: filterProps[K]) => void;
+  filter: filterProps;
+}
 
-// function PropertyHeader({ onChange, filter }: PropertyHeaderProps) {
-function PropertyHeader() {
+function PropertyHeader({ onChange, filter }: PropertyHeaderProps) {
 return (
     <div className="flex justify-between items-center">
-         {/* <FilterButton onChange={onChange} filter={filter} /> */}
-         <FilterButton  />
+         <FilterButton onChange={onChange} filter={filter} />
         <Link 
         className="text-gray-800 font-semibold bg-white px-2 py-1 rounded-sm cursor-pointer hover:bg-gray-300 transition-colors ease-in-out duration-200"
         to={'/propertys/add-property'} >
