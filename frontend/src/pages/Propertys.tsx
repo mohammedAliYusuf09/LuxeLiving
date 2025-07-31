@@ -38,8 +38,6 @@ function Propertys() {
     minPrice: '',
     maxPrice: '',
   });
-
-  console.log(filters);
   
 
   const handleOnChange = <K extends keyof filterProps>(key: K, value: filterProps[K]) => {
@@ -74,7 +72,7 @@ function Propertys() {
 
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <PropertyHeader filter={filters} onChange={handleOnChange}/>
       <PropertysText />
 

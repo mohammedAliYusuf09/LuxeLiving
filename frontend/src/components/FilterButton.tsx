@@ -1,5 +1,5 @@
 import { FaFilter } from "react-icons/fa";
-import { motion } from "motion/react";
+import {  motion  } from "motion/react";
 import type { filterProps } from "../pages/Propertys";
 import { useState } from "react";
 
@@ -8,23 +8,31 @@ interface PropertyHeaderProps {
   filter: filterProps;
 }
 
+
 function FilterButton({ onChange, filter }: PropertyHeaderProps) {
+
 
   const [isOpen, setOpen] = useState(false);
 
+  const handelFilterClick = () => {
+    setOpen(true)
+    console.log("hello filter clicked", isOpen);
+  }
+
   return (
-    <>
-      <div className="flex items-center gap-1 cursor-pointer hover:text-stone-300">
+    <div>
+      <div className="flex items-center gap-1 cursor-pointer hover:text-stone-300 bg-gray-600 py-1 px-2 rounded-sm"
+      onClick={handelFilterClick}
+      >
           <p>Filter</p>
           <span className="text-sm"><FaFilter /></span>
       </div>
-      <motion.div 
-      className="absolute flex items-center justify-center top-[50%] left-[50%] transfrom translate-x-[-50%] translate-y-[-50%] w-screen h-screen bg-gray-600 opacity-30"
-      >
-      </motion.div>
 
       <motion.div
-      className="absolute top-[50%] left-[50%] transfrom translate-x-[-50%] translate-y-[-50%]"
+        initial={{ y: -600, opacity: 0 }}
+        animate={isOpen ? { y: 0, opacity: 1 } : { y: -600, opacity: 0 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="absolute z-50 bg-gray-800 p-4 rounded-md border border-gray-300 top-16 left-1/2 transform -translate-x-1/2"
       >
         <div className=" bg-gray-800 p-4 rounded-md border border-gray-300">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -110,12 +118,13 @@ function FilterButton({ onChange, filter }: PropertyHeaderProps) {
             <button 
             // onClick={handleDone}
             className="bg-blue-600 rounded-sm cursor-pointer hover:"
-            >Done</button>
+            onClick={() => setOpen(false)}
+            >Close</button>
           </div>
         </div>
       </motion.div>
 
-    </>
+    </div>
     
   )
 }

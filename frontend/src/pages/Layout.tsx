@@ -3,7 +3,7 @@ import LeftNavbar from '../components/LeftNavbar';
 
 const Layout = () => {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       <LeftNavbar />
       <div className="flex-1 p-4  overflow-auto">
         <Outlet />
