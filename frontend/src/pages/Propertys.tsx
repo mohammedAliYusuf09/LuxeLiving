@@ -5,27 +5,10 @@ import PropertysText from "../components/PropertysText";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { type property } from "../lib/utils";
+import { type filterProps } from "../lib/utils";
 
-export interface property {
-  _id: string,
-  images: [string];
-  title: string;
-  bedrooms: number;
-  bathrooms: number;
-  size: string;
-  price: string;
-  status: string;
-}
 
-export interface filterProps {
-  propertyType : string | '',
-  location: string | '',
-  status: string | '',
-  bedrooms: string | '',
-  bathrooms: string | '',
-  minPrice: string | '',
-  maxPrice: string | '',
-}
 
 function Propertys() {
 

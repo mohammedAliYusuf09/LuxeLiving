@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import FilterButton from './FilterButton'
-import type { filterProps } from '../pages/Propertys';
+import { type filterProps } from '../lib/utils';
 interface PropertyHeaderProps {
   onChange: <K extends keyof filterProps>(key: K, value: filterProps[K]) => void;
   filter: filterProps;

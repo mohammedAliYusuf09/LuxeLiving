@@ -7,6 +7,7 @@ import Blogs from "./pages/Blogs";
 import Propertys from "./pages/Propertys";
 import Messages from "./pages/Messages";
 import AddProperty from "./pages/AddProperty";
+import PropertyDetails from "./pages/PropertyDetails";
 
 function App() {
   const { getItemAuthWithExpiry } = useAuthStore();
@@ -25,6 +26,7 @@ function App() {
         <Route element={<Layout />}>
           <Route index element={<Propertys />} />
           <Route path="/propertys" element={<Propertys />} />
+          <Route path="/propertys/:id" element={<PropertyDetails />}/>
           <Route path="/propertys/add-property" element={<AddProperty />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/messages" element={<Messages />} />

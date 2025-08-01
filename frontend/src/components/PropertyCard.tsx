@@ -1,8 +1,17 @@
-import type { property } from "../pages/Propertys";
+import { useNavigate } from "react-router-dom";
+import { type property } from "../lib/utils";
 
 function PropertyCard({ propertyItem }: { propertyItem: property }) {    
+    const navigate = useNavigate();
+
+    const handelCardClidk = () => {
+        navigate(`/propertys/${propertyItem._id}`)
+    }
+
     return (
-        <div className="max-h-48 flex items-center gap-6 bg-[#21222D] p-2 rounded-md">
+        <div className="max-h-48 flex items-center gap-6 bg-[#21222D] p-2 rounded-md cursor-pointer"
+        onClick={handelCardClidk}
+        >
             <img className="w-48 rounded-md" src={propertyItem.images[0]} alt={propertyItem.title} />
             <div className="flex flex-col gap-1">
                 <h5 className="text-xl font-medium">{propertyItem.title}</h5>

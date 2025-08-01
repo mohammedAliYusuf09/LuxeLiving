@@ -1,6 +1,7 @@
 //// create property
 import { Property } from "../model/property.model.js";
 import {uploadOnCloudinary} from "../config/cloudinary.js"
+import { log } from "console";
 
 const addProperty = async (req, res) => {
   // chack if uset is authenticated
@@ -147,6 +148,7 @@ const getAllProperties = async (req, res) => {
 };
 // get property by id
 const getPropertyById = async (req, res) => {
+
   // chack if uset is authenticated
 
   const { email } = req.agent;

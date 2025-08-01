@@ -1,7 +1,7 @@
 import { FaFilter } from "react-icons/fa";
 import {  motion  } from "motion/react";
-import type { filterProps } from "../pages/Propertys";
 import { useState } from "react";
+import { type filterProps } from "../lib/utils";
 
 interface PropertyHeaderProps {
   onChange: <K extends keyof filterProps>(key: K, value: filterProps[K]) => void;
