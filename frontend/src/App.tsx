@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useAuthStore } from "./authStore";
+import { useAuthStore } from "./store/authStore";
 import SecurityPage from "./pages/SecurityPage";
 import Settings from "./pages/Settings";
 import Layout from "./pages/Layout";
@@ -8,6 +8,7 @@ import Propertys from "./pages/Propertys";
 import Messages from "./pages/Messages";
 import AddProperty from "./pages/AddProperty";
 import PropertyDetails from "./pages/PropertyDetails";
+import EditProperty from "./pages/EditProperty";
 
 function App() {
   const { getItemAuthWithExpiry } = useAuthStore();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/propertys" element={<Propertys />} />
           <Route path="/propertys/:id" element={<PropertyDetails />}/>
           <Route path="/propertys/add-property" element={<AddProperty />} />
+          <Route path="/propertys/edit-property/:id" element={<EditProperty/>} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/settings" element={<Settings />} />

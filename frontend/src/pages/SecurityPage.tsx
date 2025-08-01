@@ -1,7 +1,7 @@
 import { FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
 import axios from "axios";
-import { useAuthStore } from "../authStore";
+import { useAuthStore } from "../store/authStore";
 
 function SecurityPage() {
   const [password, setPassword] = useState("");

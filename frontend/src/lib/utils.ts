@@ -41,3 +41,22 @@ export interface filterProps {
   minPrice: string | '',
   maxPrice: string | '',
 }
+
+export interface PropertyForm {
+        title: string;
+        summary: string;
+        description: string;
+        propertyType: string;
+        price: string;
+        location: string;
+        size: string;
+        lotSize: string;
+        bedrooms: string;
+        bathrooms: string;
+        parkingSpaces: string;
+        yearBuilt: string;
+        status: string;
+        lat: string;
+        lng: string;
+        images: string[];
+    }

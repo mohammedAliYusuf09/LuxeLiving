@@ -4,14 +4,18 @@ import { type PropertyFull } from "../lib/utils";
 import axios from "axios";
 import { Suspense } from "react";
 import PropertyData from "../components/PropertyData";
+import { propertyStore } from "../store/propertyStore";
 
 function PropertyDetails() {
   const {id} = useParams()
+
+  const {setProperty} = propertyStore();
 
   const getPropertyDetails = async (): Promise<PropertyFull | string> => {
     try {
       axios.defaults.withCredentials = true;
       const response = await axios.get(`http://localhost:3000/api/v1/property/get-property-details/${id}`);
+      setProperty(response.data.property)
       return response.data.property;
     } catch (error: unknown) {
       if (error instanceof Error) {

@@ -4,29 +4,36 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from 'react-toastify';
 import type { PropertyForm } from "../lib/utils";
+import { propertyStore } from "../store/propertyStore";
 import { useNavigate } from "react-router-dom";
 
-function AddProperty() {
+// const override: CSSProperties = {
+//   display: "block",
+//   margin: "0 auto",
+//   borderColor: "red",
+// };
 
-    
+function EditProperty() {
+
+    const { property } = propertyStore();
 
     const [form, setForm] = useState<PropertyForm>({
-        title: "",
-        summary: "",
-        description: "",
-        propertyType: "",
-        price: "",
-        location: "",
-        size: "",
-        lotSize: "",
-        bedrooms: "",
-        bathrooms: "",
-        parkingSpaces: "",
-        yearBuilt: "",
-        status: "",
-        lat: "",
-        lng: "",
-        images: [],
+      title: property?.title || "",
+      summary: property?.summary || "",
+      description: property?.description || "",
+      propertyType: property?.propertyType || "",
+      price: property?.price !== undefined ? String(property.price) : "",
+      location: property?.location || "",
+      size: property?.size || "",
+      lotSize: property?.lotSize || "",
+      bedrooms: property?.bedrooms !== undefined ? String(property.bedrooms) : "",
+      bathrooms: property?.bathrooms !== undefined ? String(property.bathrooms) : "",
+      parkingSpaces: property?.parkingSpaces || "",
+      yearBuilt: property?.yearBuilt !== undefined ? String(property.yearBuilt) : "",
+      status: property?.status || "",
+      lat: property?.lat || "",
+      lng: property?.lng || "",
+      images: property?.images || [],
     });
 
     const [image, setImage] = useState<FileList | null>(null);
@@ -54,8 +61,8 @@ function AddProperty() {
         setError(null);
 
         try {
-          const response = await axios.post(
-            "http://localhost:3000/api/v1/property/add-property",
+          const response = await axios.put(
+            `http://localhost:3000/api/v1/property/update-property/${property?._id}`,
             form, 
             {
             headers: {
@@ -85,8 +92,7 @@ function AddProperty() {
             images: [],
           });
           notify();
-          navigate('/propertys');
-
+          navigate('/propertys')
         } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       console.error(
@@ -158,7 +164,7 @@ function AddProperty() {
 
   return (
     <form className="p-6 rounded-lg text-white space-y-6" onSubmit={handleSubmit}>
-        <h3 className="text-xl font-semibold">Add Property</h3>
+        <h3 className="text-xl font-semibold">Edit Property</h3>
         {error && <p>{error}</p>}
       {/* Title, Summary, Description */}
       <div className="space-y-4">
@@ -385,7 +391,7 @@ function AddProperty() {
             color={'#ffffff'}
             loading={formLoading}
             /> 
-          :"Submit Property"}
+          :"Update Property"}
         </button>
         <ToastContainer 
         position= "bottom-center"
@@ -396,4 +402,4 @@ function AddProperty() {
   );
 }
 
-export default AddProperty
+export default EditProperty
