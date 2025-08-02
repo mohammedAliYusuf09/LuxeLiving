@@ -38,7 +38,7 @@ function PropertyCard({ propertyItem }: { propertyItem: property }) {
         <div className="max-h-48 flex items-center gap-6 bg-[#21222D] p-2 rounded-md relative">
             <div className="w-48 h-36 rounded-md cursor-pointer">
                 <img
-                    className="w-full h-full rounded-md hover:scale-105 transition-all ease duration-100"
+                    className="w-full h-full rounded-md object-cover hover:scale-105 transition-all ease duration-100"
                     src={propertyItem.images[0]}
                     alt={propertyItem.title}
                     onClick={handelCardClidk}
