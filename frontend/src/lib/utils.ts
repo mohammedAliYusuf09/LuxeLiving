@@ -60,3 +60,14 @@ export interface PropertyForm {
         lng: string;
         images: string[];
     }
+
+export interface BlogInterface {
+  title: string,
+  htmlBody: string
+}    
+
+export interface postInter {
+  _id: string,
+  createdAt : string,
+  title: string
+}

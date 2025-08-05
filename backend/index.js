@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './db/connectDB.js';
 import { agentRouter } from './router/agent.router.js';
 import propertyRouter from './router/property.route.js';
+import blogRouter from './router/blog.router.js';
 
 dotenv.config(
     {
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/agent', agentRouter)
 app.use('/api/v1/property', propertyRouter)
+app.use('/api/v1/blog', blogRouter)
 
 app.listen(port,()=> {
     connectDB();

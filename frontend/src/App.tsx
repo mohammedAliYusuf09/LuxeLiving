@@ -9,6 +9,7 @@ import Messages from "./pages/Messages";
 import AddProperty from "./pages/AddProperty";
 import PropertyDetails from "./pages/PropertyDetails";
 import EditProperty from "./pages/EditProperty";
+import AddBlog from "./pages/AddBlog";
 
 function App() {
   const { getItemAuthWithExpiry } = useAuthStore();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/propertys/add-property" element={<AddProperty />} />
           <Route path="/propertys/edit-property/:id" element={<EditProperty/>} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/add-blog" element={<AddBlog />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/settings" element={<Settings />} />
           {/* Add more routes as needed */}
