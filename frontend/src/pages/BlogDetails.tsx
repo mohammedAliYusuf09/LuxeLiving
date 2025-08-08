@@ -1,16 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import type { Blog } from "../lib/utils";
 import "../lib/blog.css"
+import { useBlogStore } from "../store/useBlogStore";
 
 function BlogDetails() {
     const {id} = useParams()
+
+    const { setBlog } = useBlogStore();
+
+    
 
     const getBlogDetails = async (): Promise<Blog | string> => {
         try {
           axios.defaults.withCredentials = true;
           const response = await axios.get(`http://localhost:3000/api/v1/blog/get-details/${id}`);
+          setBlog(response.data.blog);
           return response.data.blog;
         } catch (error: unknown) {
           if (error instanceof Error) {
@@ -34,6 +40,10 @@ function BlogDetails() {
             <div>
                 <h1 className="text-3xl font-semibold mb-6">{data.title}</h1>
                 <div className="html-content" dangerouslySetInnerHTML={{ __html: data.htmlBody }} />
+                <Link to={`/blogs/edit/${data._id}`}
+                  className="bg-blue-400 px-2 py-1 rounded-md cursor-pointer mt-2 hover:bg-blue-600 transition-colors ease-in-out duration-150"
+                  >Edit Blog
+                </Link>
             </div>
         )
       }else{

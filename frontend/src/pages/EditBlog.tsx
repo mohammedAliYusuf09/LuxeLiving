@@ -1,53 +1,52 @@
 import { useState } from "react";
 import TipTap from "../components/TipTap";
-import type { Blog, BlogInterface } from "../lib/utils";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import type { BlogInterface } from "../lib/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useBlogStore } from "../store/useBlogStore";
 
 function EditBlog() {
+  const { id } = useParams<{ id: string }>(); // Get the ID from URL params
 
-    const { id } = useParams<{ id: string }>(); // Get the ID from URL params
+  // const getBlogDetails = async (): Promise<Blog> => {
+  //   try {
+  //     axios.defaults.withCredentials = true;
+  //     const response = await axios.get(
+  //       `http://localhost:3000/api/v1/blog/get-details/${id}`
+  //     );
+  //     console.log("API Response:", response);
+  //     return response.data.blog;
+  //   } catch (error) {
+  //     console.error("Error fetching blog details:", error);
+  //     throw error; // Important to re-throw for React Query to catch
+  //   }
+  // };
 
-    const getBlogDetails = async (): Promise<Blog> => {
-      try {
-        axios.defaults.withCredentials = true;
-        const response = await axios.get(
-          `http://localhost:3000/api/v1/blog/get-details/${id}`
-        );
-        console.log("API Response:", response);
-        return response.data.blog;
-      } catch (error) {
-        console.error("Error fetching blog details:", error);
-        throw error; // Important to re-throw for React Query to catch
-      }
-    };
+  // const { error, data } = useQuery({
+  //   queryKey: ["blogUpdate", id],
+  //   queryFn: getBlogDetails,
+  // });
 
-    const { error, data } = useQuery({
-      queryKey: ["blogUpdate", id],
-      queryFn: getBlogDetails,
-    });
+  const { blog } = useBlogStore();
+  const navigate = useNavigate();
 
-    console.log("data", data);
-    
-
-    const [formData, setFromData] = useState<BlogInterface>({
-      title: data?.title || "",
-      htmlBody: data?.htmlBody || "",
-    });
-
-  console.log("formData",formData);
-  
-  const editor = useEditor({
-    extensions: [StarterKit, Image], // define your extension array
-    content: formData?.htmlBody // initial content
+  const [formData, setFromData] = useState<BlogInterface>({
+    title: blog?.title || "",
+    htmlBody: blog?.htmlBody || "",
   });
 
-  
+  console.log("formData", formData);
+
+  const editor = useEditor({
+    extensions: [StarterKit, Image], // define your extension array
+    content: formData?.htmlBody, // initial content
+  });
+
   const notify = (message: string) => toast(message);
 
   const [isLoading, setLoading] = useState(false);
@@ -55,28 +54,32 @@ function EditBlog() {
   const updateBlog = async () => {
     axios.defaults.withCredentials = true;
     setLoading(true);
-    await axios.put(`http://localhost:3000/api/v1/blog/update/${id}`, formData);
+    const response = await axios.put(
+      `http://localhost:3000/api/v1/blog/update/${id}`,
+      formData
+    );
+    return response.data;
   };
 
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: updateBlog,
-    onSuccess: () => {
+    onSuccess: (responseData) => {
       // Optionally refetch or update query cache
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
       setFromData({
         title: "",
         htmlBody: "",
       });
-      notify("Blog Is successfully updated");
+      notify(responseData.message);
       editor.chain().focus().clearContent().run();
       setLoading(false);
+      navigate("/blogs");
     },
-    onError: () => {
-      console.log("Blog could not be updated");
-      notify("Blog could not be updated");
-      setLoading(false);
+    onError: (error: AxiosError) => {
+      console.log("Blog could not be Updated");
+      notify(error.message || "An error occurred");
     },
   });
 
@@ -99,7 +102,6 @@ function EditBlog() {
 
   return (
     <>
-      {error && <h2 className="text-2xl text-center text-red-400">{error?.message}</h2>}
       <input
         type="text"
         name="title"

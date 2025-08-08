@@ -7,9 +7,6 @@ import type { PropertyForm } from "../lib/utils";
 import { useNavigate } from "react-router-dom";
 
 function AddProperty() {
-
-    
-
     const [form, setForm] = useState<PropertyForm>({
         title: "",
         summary: "",

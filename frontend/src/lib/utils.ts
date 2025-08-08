@@ -1,3 +1,5 @@
+import type { ErrorResponse } from "react-router-dom";
+
 export interface property {
   _id: string,
   images: [string];
@@ -78,4 +80,18 @@ export interface Blog {
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
   __v: number;
+}
+
+
+export interface AxiosError {
+  response?: {
+    data: ErrorResponse;
+    status: number;
+    statusText: string;
+  };
+  // other error properties
+  message: string;
+  code?: string;
+  isAxiosError: boolean;
+  toJSON: () => object;
 }

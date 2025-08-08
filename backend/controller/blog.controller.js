@@ -217,7 +217,7 @@ const deleteBlogById = async (req, res) => {
         .json({ success: false, message: "Blog is not found"});
     }
   
-    await Blog.findByIdAndUpdate(id)
+    await Blog.findByIdAndDelete(id)
       return res
         .status(203)
         .json({ success: true, message: "Blog is deleted" });

@@ -2,7 +2,7 @@ import { useState } from "react";
 import TipTap from "../components/TipTap";
 import type { BlogInterface } from "../lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -27,31 +27,30 @@ function AddBlog() {
   const submitBlog = async () => {
       axios.defaults.withCredentials = true;
       setLoading(true);
-      await axios.post('http://localhost:3000/api/v1/blog/create-blog',formData)
+      const response = await axios.post('http://localhost:3000/api/v1/blog/create-blog',formData)
+      return response.data;
     }
     
 
    const queryClient = useQueryClient();
    
-    const { mutate  } = useMutation({
+    const { mutate } = useMutation({
        mutationFn: submitBlog,
-       onSuccess: () => {
+       onSuccess: (responseData) => {
          // Optionally refetch or update query cache
          queryClient.invalidateQueries({ queryKey: ["blogs"] });
          setFromData({
           title: "",
           htmlBody: ""
         })
-         notify("Blog Is successfully added");
+         notify(responseData.message);
          editor.chain().focus().clearContent().run();
          setLoading(false)
-        
        },
-       onError: () => {
-         console.log("Blog could not be added");
-         notify("Blog could not be added");
-         setLoading(false)
-       },
+       onError: (error:AxiosError) => {
+             console.log("Blog could not be Added");
+             notify(error.message || "An error occurred");
+           },
     });
      
      
