@@ -71,3 +71,11 @@ export interface postInter {
   createdAt : string,
   title: string
 }
+export interface Blog {
+  _id: string;
+  title: string;
+  htmlBody: string;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+  __v: number;
+}

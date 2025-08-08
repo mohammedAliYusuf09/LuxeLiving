@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+
+/* Reset & Base Styles (scoped) */
+.html-content {
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.html-content *,
+.html-content *:before,
+.html-content *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+
+.html-content {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Typography (scoped) */
+.html-content h1,
+.html-content h2,
+.html-content h3,
+.html-content h4,
+.html-content h5,
+.html-content h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.html-content h1 { font-size: 2.5rem; }
+.html-content h2 { font-size: 2rem; }
+.html-content h3 { font-size: 1.75rem; }
+.html-content h4 { font-size: 1.5rem; }
+.html-content h5 { font-size: 1.25rem; }
+.html-content h6 { font-size: 1rem; }
+
+.html-content p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Links (scoped) */
+.html-content a {
+  color: #0066cc;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.html-content a:hover {
+  color: #004499;
+  text-decoration: underline;
+}
+
+/* Lists (scoped) */
+.html-content ul,
+.html-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.html-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Images (scoped) */
+.html-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+/* Blockquote (scoped) */
+.html-content blockquote {
+  border-left: 4px solid #ddd;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: #555;
+  font-style: italic;
+}
+
+/* Code & Pre (scoped) */
+.html-content code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.html-content pre {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.html-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Tables (scoped) */
+.html-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.html-content th,
+.html-content td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.html-content th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+}
+
+.html-content tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Buttons (scoped) */
+.html-content button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.html-content button:hover {
+  background-color: #004499;
+}
+
+/* Forms (scoped) */
+.html-content input,
+.html-content textarea,
+.html-content select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.html-content label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Horizontal Rule (scoped) */
+.html-content hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1.5rem 0;
+}

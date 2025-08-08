@@ -80,6 +80,7 @@ function AddBlog() {
   
   return (
     <>
+
     <input
           type="text"
           name="title"
@@ -96,7 +97,7 @@ function AddBlog() {
         className="bg-blue-400 px-2 py-1 rounded-md cursor-pointer mt-2 hover:bg-blue-600 transition-colors ease-in-out duration-150"
         onClick={() => mutate()}
       >{
-        isLoading  ? "Uploading..." : "Upload Blog"
+        isLoading  ? "Uploading..." : "Create Blog"
       }
       </button>
 

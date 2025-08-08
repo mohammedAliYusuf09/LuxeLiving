@@ -27,8 +27,6 @@ function Blogs() {
     queryKey: ["blogs"],
     queryFn: () => getBlogs(),
   });
-
-  console.log(data);
   
 
 
