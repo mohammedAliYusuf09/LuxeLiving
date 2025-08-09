@@ -51,8 +51,7 @@ const signUpAgent = async (req, res) => {
 }
 
 const logInAgent = async (req, res) => {
-    // get all fields
-    const { password} = req.body;
+    const { password } = req.body;
 
     // validate all fields
     if (!password) {

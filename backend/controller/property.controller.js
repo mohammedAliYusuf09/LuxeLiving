@@ -32,28 +32,28 @@ const addProperty = async (req, res) => {
   } = req.body;
   
 
-  if (!title) return res.status(3000).json({ success: false, message: "Title is required" });
-  if (!summary) return res.status(3000).json({ success: false, message: "Summary is required" }) ;
-  if (!description) return res.status(3000).json({ success: false, message: "Description is required" }) ;
-  if (!propertyType) return res.status(3000).json({ success: false, message: "Property type is required"}) ;
+  if (!title) return res.status(300).json({ success: false, message: "Title is required" });
+  if (!summary) return res.status(300).json({ success: false, message: "Summary is required" }) ;
+  if (!description) return res.status(300).json({ success: false, message: "Description is required" }) ;
+  if (!propertyType) return res.status(300).json({ success: false, message: "Property type is required"}) ;
   if (!['House', 'Apartment', 'Condo', 'Townhouse', 'Villa'].includes(propertyType)) {
-    return res.status(3000).json({ success: false, message: "Invalid property type" });
+    return res.status(300).json({ success: false, message: "Invalid property type" });
   }
-  if (!price || isNaN(price)) return res.status(3000).json({ success: false, message: "Valid price is required" }) ;
-  if (!location) return res.status(3000).json({ success: false, message: "Location is required" }) ;
-  if (!size) return res.status(3000).json({ success: false, message: "Size is required" }) ;
-  if (!bedrooms || isNaN(bedrooms)) return res.status(3000).json({ success: false, message: "Valid number of bedrooms is required" }) ;
-  if (!bathrooms || isNaN(bathrooms)) return res.status(3000).json( { success: false, message: "Valid number of bathrooms is required" });
-  if (!parkingSpaces) return res.status(3000).json({ success: false, message: "Parking spaces are required" }) ;
-  if (!yearBuilt || isNaN(yearBuilt)) return res.status(3000).json({ success: false, message: "Valid year built is required" }) ;
-  if (!status) return res.status(3000).json({ success: false, message: "Status is required" }) ;
+  if (!price || isNaN(price)) return res.status(300).json({ success: false, message: "Valid price is required" }) ;
+  if (!location) return res.status(300).json({ success: false, message: "Location is required" }) ;
+  if (!size) return res.status(300).json({ success: false, message: "Size is required" }) ;
+  if (!bedrooms || isNaN(bedrooms)) return res.status(300).json({ success: false, message: "Valid number of bedrooms is required" }) ;
+  if (!bathrooms || isNaN(bathrooms)) return res.status(300).json( { success: false, message: "Valid number of bathrooms is required" });
+  if (!parkingSpaces) return res.status(300).json({ success: false, message: "Parking spaces are required" }) ;
+  if (!yearBuilt || isNaN(yearBuilt)) return res.status(300).json({ success: false, message: "Valid year built is required" }) ;
+  if (!status) return res.status(300).json({ success: false, message: "Status is required" }) ;
   if (!['Available', 'Sold', 'Pending'].includes(status)) {
-    return res.status(3000).json({ success: false, message: "Invalid status" }) ;
+    return res.status(300).json({ success: false, message: "Invalid status" }) ;
   }
-  if (!lat) return res.status(3000).json({ success: false, message: "Latitude is required" }) ;
-  if (!lng) return res.status(3000).json( { success: false, message: "Longitude is required" });
+  if (!lat) return res.status(300).json({ success: false, message: "Latitude is required" }) ;
+  if (!lng) return res.status(300).json( { success: false, message: "Longitude is required" });
   if (!Array.isArray(images) || images.length === 0) {
-    return res.status(3000).json( { success: false, message: "At least one image is required" });
+    return res.status(300).json( { success: false, message: "At least one image is required" });
   }
 
    console.log(req.body.status);

@@ -9,6 +9,6 @@ const clientSchema = new Schema({
         type: String,
         required: true
     }
-})
+},{timestamps: true})
 
 export const Client = mongoose.model("Client", clientSchema);

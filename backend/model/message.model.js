@@ -15,7 +15,8 @@ const messageSchema = new Schema({
     },
     firstRespond: {
         type: String,
-        required: true
+
+        default: ""
     }
 })
 
