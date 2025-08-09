@@ -12,21 +12,28 @@ import EditProperty from "./pages/EditProperty";
 import AddBlog from "./pages/AddBlog";
 import BlogDetails from "./pages/BlogDetails";
 import EditBlog from "./pages/EditBlog";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
-  const { getItemAuthWithExpiry } = useAuthStore();
-  const isAuth = getItemAuthWithExpiry('setIsAuthenticated');
+  const { isAuthenticated } = useAuthStore();
 
   return (
     <Routes>
       {/* Public Route */}
       <Route
+        path="/protected"
+        // element={!isAuthenticated ? <SecurityPage /> : <Navigate to="/" />}
+        element={ <ProtectedRoute/>}
+      />
+
+      <Route
         path="/security"
-        element={!isAuth ? <SecurityPage /> : <Navigate to="/" />}
+        // element={!isAuthenticated ? <SecurityPage /> : <Navigate to="/" />}
+        element={ <SecurityPage/>}
       />
 
       {/* Protected Routes with Layout */}
-      {isAuth && (
+      {isAuthenticated && (
         <Route element={<Layout />}>
           <Route index element={<Propertys />} />
           <Route path="/propertys" element={<Propertys />} />
@@ -44,8 +51,8 @@ function App() {
       )}
 
       {/* Fallback: redirect to /security if not logged in */}
-      {!isAuth && (
-        <Route path="*" element={<Navigate to="/security" />} />
+      {!isAuthenticated && (
+        <Route path="*" element={<Navigate to="/protected" />} />
       )}
     </Routes>
   );

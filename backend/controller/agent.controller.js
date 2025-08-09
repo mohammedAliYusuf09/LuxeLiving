@@ -267,6 +267,25 @@ const resetPassword = async (req, res) => {
     return res.status(200).json({success: true, message: "Password updated successfully"});                 
 }
 
+const chackIsLogdin = async (req, res) => {
+    const { email } = req.agent;
+    if (!email) {
+        return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+    try {
+        const user = await Agent.findOne({email}).select( "-password -resetPasswordOTP")
+
+        if(!user){
+            return res.status(400).json({success: false, message: "user could not found on database"})
+        }
+
+        return res.status(200).json({success: true, message: "user is logdIn", user})
+    } catch (error) {
+        return res.status(400).json({success: false, message: "Internal server error"});
+    }
+    
+}
+
 
 
 
@@ -278,5 +297,6 @@ export{
     forgetPassword,
     validateOtp,
     saveNewPassword,
-    resetPassword
+    resetPassword,
+    chackIsLogdin
 }

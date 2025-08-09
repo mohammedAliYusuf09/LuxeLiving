@@ -52,7 +52,6 @@ const sendMessageToAgent = async (req, res) => {
 }
 
 // Unauthorized 
-
 const getAllMessages = async (req, res) => {
     const { email } = req.agent;
     if (!email) {

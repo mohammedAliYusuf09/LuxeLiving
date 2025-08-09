@@ -95,3 +95,11 @@ export interface AxiosError {
   isAxiosError: boolean;
   toJSON: () => object;
 }
+
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  // Add more fields as required
+}

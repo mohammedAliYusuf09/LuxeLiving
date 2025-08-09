@@ -1,13 +1,15 @@
-import { FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 function SecurityPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const { setIsAuthenticated, setUser, setItemAuthWithExpiry }= useAuthStore();
+  const { setIsAuthenticated, setUser } = useAuthStore();
+  const navigate = useNavigate()
 
   
 
@@ -21,44 +23,36 @@ function SecurityPage() {
     try {
       setError(null);
       axios.defaults.withCredentials = true;
-      const response = await axios.post("http://localhost:3000/api/v1/agent/login", { password });
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/agent/login",
+        { password }
+      );
       // Assuming the response contains a token or auth status
       console.log("Login success:", response.data.agent);
-
-      // Example: update Zustand or redirect
-      setItemAuthWithExpiry('setIsAuthenticated', true, 3600000 * 24);
       setIsAuthenticated(true);
       // useAuthStore.getState().setIsAuthenticated(true);
-      setUser(response.data.agent)
+      setUser(response.data.agent);
+      navigate('/');
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(
-          "Login failed:",
-          error.response?.data?.message || error.message
-        );
-         setError(error.response?.data?.message || error.message)
-      } else if (error instanceof Error) {
-        console.error("Login failed:", error.message);
-        setError(error.message);
-      } else {
-        console.error("Login failed:", error);
-        setError("Unknown Error apiar : Login failed")
+      if (error instanceof Error) {
+        return error.message;
       }
+      return "An unknown error occurred";
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen gradinet-bd">
       <div className="flex flex-col gap-2">
         {
           error && <p className="text-center text-red-400">{error}</p>
         }
         <form
-          className="flex bg-yellow-50 rounded-md shadow-md p-[2px]"
+          className="flex bg-gray-300 rounded-md shadow-md p-[2px]"
           onSubmit={handleSubmit}
         >
           <input
-            className="bg-[#171821] text-white rounded-md p-2 focus:outline-none"
+            className="bg-[#020024] text-white rounded-md p-2 focus:outline-none"
             type="password"
             placeholder="Enter your password"
             value={password}
@@ -77,6 +71,7 @@ function SecurityPage() {
       </div>
     </div>
   );
+
 }
 
 export default SecurityPage;
