@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Blog } from '../lib/utils'
+import type { Blog } from '../lib/types'
 
 interface blogStorePrope {
     blog: Blog | null,

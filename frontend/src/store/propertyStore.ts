@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { PropertyFull } from '../lib/utils'
+import type { PropertyFull } from '../lib/types'
 
 interface propertyStoreProp {
     property: PropertyFull | null,

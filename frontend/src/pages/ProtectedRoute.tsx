@@ -1,4 +1,4 @@
-import type { User } from "@/lib/utils";
+import type { User } from "@/lib/types";
 import { useAuthStore } from "@/store/authStore";
 import axios from "axios";
 import { useEffect } from "react";

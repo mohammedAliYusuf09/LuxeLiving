@@ -1,7 +1,7 @@
 import { FaFilter } from "react-icons/fa";
 import {  motion  } from "motion/react";
 import { useState } from "react";
-import { type filterProps } from "../lib/utils";
+import { type filterProps } from "../lib/types";
 
 interface PropertyHeaderProps {
   onChange: <K extends keyof filterProps>(key: K, value: filterProps[K]) => void;
@@ -21,7 +21,7 @@ function FilterButton({ onChange, filter }: PropertyHeaderProps) {
 
   return (
     <div>
-      <div className="flex items-center gap-1 cursor-pointer hover:text-stone-300 bg-gray-600 py-1 px-2 rounded-sm"
+      <div className="flex items-center gap-1 cursor-pointer hover:text-stone-300"
       onClick={handelFilterClick}
       >
           <p>Filter</p>
@@ -50,7 +50,6 @@ function FilterButton({ onChange, filter }: PropertyHeaderProps) {
           <option value="Villa">Villa</option>
         </select>
 
-
             <input
               type="text"
               name="location"
@@ -59,7 +58,6 @@ function FilterButton({ onChange, filter }: PropertyHeaderProps) {
               placeholder="Location"
               className="bg-gray-800 p-3 rounded border border-gray-700"
             />
-
 
             <select
               name="status"

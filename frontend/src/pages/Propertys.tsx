@@ -5,8 +5,8 @@ import PropertysText from "../components/PropertysText";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { type property } from "../lib/utils";
-import { type filterProps } from "../lib/utils";
+import { type property } from "../lib/types";
+import { type filterProps } from "../lib/types";
 
 
 

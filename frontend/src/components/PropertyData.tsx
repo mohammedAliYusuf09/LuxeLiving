@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { PropertyFull } from "../lib/utils"
+import type { PropertyFull } from "../lib/types"
 import ImageGallery from "./ImageGallery";
 import PropertyDescription from "./PropertyDescription";
 import PropertyStatus from "./PropertyStatus";

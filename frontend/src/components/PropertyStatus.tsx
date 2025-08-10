@@ -8,7 +8,7 @@ import { FaParking } from "react-icons/fa";
 import { SiCloudfoundry } from "react-icons/si";
 import { GrStatusGood } from "react-icons/gr";
 import { CgSize } from "react-icons/cg";
-import type { PropertyFull } from "../lib/utils";
+import type { PropertyFull } from "../lib/types";
 
 function PropertyStatus({data} : {data : PropertyFull}) {
   return (

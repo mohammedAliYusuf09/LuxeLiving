@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom"
-import type { Blog } from "../lib/utils";
+import type { Blog } from "../lib/types";
 import "../lib/blog.css"
 import { useBlogStore } from "../store/useBlogStore";
 

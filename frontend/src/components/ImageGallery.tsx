@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const ImageGallery = ({images} : {images : string[]}) => {
-
-
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
   useEffect(() => {
     setSelectedImage(images[0])
   },[images])
@@ -13,6 +10,7 @@ const ImageGallery = ({images} : {images : string[]}) => {
     <div className="bg-[#14131b] p-4 rounded-lg">
       <div className="w-full h-[400px] mb-4">
         <img 
+          style={{width: "100%"}}
           src={selectedImage ? selectedImage : undefined}
           alt="Main"
           className="w-full h-full object-cover rounded-lg"

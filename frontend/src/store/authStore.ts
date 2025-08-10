@@ -1,4 +1,4 @@
-import type { User } from '@/lib/utils';
+import type { User } from '@/lib/types';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 

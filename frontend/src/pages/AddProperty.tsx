@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from 'react-toastify';
-import type { PropertyForm } from "../lib/utils";
+import type { PropertyForm } from "../lib/types";
 import { useNavigate } from "react-router-dom";
 
 function AddProperty() {

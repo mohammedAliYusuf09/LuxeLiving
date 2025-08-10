@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom"
-import { type PropertyFull } from "../lib/utils";
+import { type PropertyFull } from "../lib/types";
 import axios from "axios";
 import { Suspense } from "react";
 import PropertyData from "../components/PropertyData";

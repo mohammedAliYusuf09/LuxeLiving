@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { postInter } from "../lib/utils";
+import type { postInter } from "../lib/types";
 import axios, { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast, ToastContainer } from "react-toastify";
@@ -36,9 +36,9 @@ function BlogArticle({ post }: Blog) {
   });
 
   return (
-    <article className="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+    <article className="p-6 bg-[#171717] rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-800">
       <div className="flex justify-between items-start">
-        <h2 className="text-xl font-semibold text-gray-800 line-clamp-2">
+        <h2 className="text-xl font-semibold text-white line-clamp-2">
           {post.title}
         </h2>
         <time

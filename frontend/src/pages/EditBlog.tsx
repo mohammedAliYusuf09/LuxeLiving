@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TipTap from "../components/TipTap";
-import type { BlogInterface } from "../lib/utils";
+import type { BlogInterface } from "../lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { toast, ToastContainer } from "react-toastify";

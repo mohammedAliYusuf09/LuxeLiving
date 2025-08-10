@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import BlogArticle from "../components/BlogArticle";
-import type { postInter } from "../lib/utils";
+import type { postInter } from "../lib/types";
 
 
 
@@ -34,12 +34,11 @@ function Blogs() {
     <>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1 mt-3 ">
-          <h5 className="text-white font-semibold">Propertyes</h5>
+          <h5 className="text-white font-semibold">Blogs</h5>
         </div>
-        <Link
-          className="text-gray-800 font-semibold bg-white px-2 py-1 rounded-sm cursor-pointer hover:bg-gray-300 transition-colors ease-in-out duration-200"
-          to={"/blogs/add-blog"}
-        >
+        <Link 
+          className="text-gray-200 bg-[#171717] font-semibold px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-[#121212] transition-colors ease-in-out duration-200 border-2 border-white"
+          to={'/blogs/add-blog'} >
           Add Blog
         </Link>
       </div>
