@@ -56,7 +56,7 @@ function Propertys() {
 
   return (
     <div className="overflow-hidden">
-      <PropertyHeader filter={filters} onChange={handleOnChange}/>
+      <PropertyHeader filter={filters} setFilters={setFilters} onChange={handleOnChange}/>
       <PropertysText />
 
       {/* Conditional rendering based on loading, error, and data */}
