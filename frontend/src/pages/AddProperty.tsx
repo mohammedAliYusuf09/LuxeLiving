@@ -165,7 +165,7 @@ function AddProperty() {
           value={form.title}
           onChange={handleChange}
           placeholder="Title*"
-          className="w-full bg-gray-800 p-3 rounded border border-gray-700"
+          className="input-style w-full p-3"
         />
         <input
           type="text"
@@ -173,7 +173,7 @@ function AddProperty() {
           value={form.summary}
           onChange={handleChange}
           placeholder="Summary*"
-          className="w-full bg-gray-800 p-3 rounded border border-gray-700"
+          className="input-style w-full p-3"
         />
         <textarea
           name="description"
@@ -181,7 +181,7 @@ function AddProperty() {
           onChange={handleChange}
           placeholder="Description*"
           rows={4}
-          className="w-full bg-gray-800 p-3 rounded border border-gray-700 resize-none"
+          className="input-style w-full p-3 resize-none"
         />
       </div>
 
@@ -192,7 +192,7 @@ function AddProperty() {
           name="propertyType"
           value={form.propertyType}
           onChange={handleChange}
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         >
           <option value="">Property Type*</option>
@@ -210,7 +210,7 @@ function AddProperty() {
           value={form.price}
           onChange={handleChange}
           placeholder="Price*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
 
@@ -221,7 +221,7 @@ function AddProperty() {
           value={form.location}
           onChange={handleChange}
           placeholder="Location*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
 
@@ -232,7 +232,7 @@ function AddProperty() {
           value={form.size}
           onChange={handleChange}
           placeholder="Size (sqft)*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
 
@@ -243,7 +243,7 @@ function AddProperty() {
           value={form.lotSize}
           onChange={handleChange}
           placeholder="Lot Size (optional)"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
         />
 
         {/* Bedrooms */}
@@ -253,7 +253,7 @@ function AddProperty() {
           value={form.bedrooms}
           onChange={handleChange}
           placeholder="Bedrooms*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
 
@@ -264,7 +264,7 @@ function AddProperty() {
           value={form.bathrooms}
           onChange={handleChange}
           placeholder="Bathrooms*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
 
@@ -275,7 +275,7 @@ function AddProperty() {
           value={form.parkingSpaces}
           onChange={handleChange}
           placeholder="Parking Spaces*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
 
@@ -286,7 +286,7 @@ function AddProperty() {
           value={form.yearBuilt}
           onChange={handleChange}
           placeholder="Year Built*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
 
@@ -295,7 +295,7 @@ function AddProperty() {
           name="status"
           value={form.status}
           onChange={handleChange}
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         >
           <option value="">Status*</option>
@@ -311,7 +311,7 @@ function AddProperty() {
           value={form.lat}
           onChange={handleChange}
           placeholder="lat (lat)*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
         <input
@@ -320,7 +320,7 @@ function AddProperty() {
           value={form.lng}
           onChange={handleChange}
           placeholder="lng ( lng)*"
-          className="bg-gray-800 p-3 rounded border border-gray-700"
+          className="bg-[#171717] p-3 rounded border border-gray-700"
           required
         />
       </div>
@@ -333,7 +333,7 @@ function AddProperty() {
                 image ? (<button
                 type="button"
                 onClick={() => image && uploadImageOnCloudnary(image[0])}
-                className="w-20 h-20 bg-gray-800 border border-dashed border-gray-600 rounded flex items-center justify-center text-2xl cursor-pointer"
+                className="w-20 h-20 bg-[#171717] border border-dashed border-gray-600 rounded flex items-center justify-center text-2xl cursor-pointer"
                 >{isLoading 
                   ? 
                 <ClipLoader
@@ -346,7 +346,7 @@ function AddProperty() {
                   (
                     <input 
                     onChange={handelImageChange}
-                    type="file" placeholder="+" className="w-20 h-20 bg-gray-800 border border-dashed border-gray-600 rounded flex items-center justify-center text-2xl" />
+                    type="file" placeholder="+" className="w-20 h-20 bg-[#171717] border border-dashed border-gray-600 rounded flex items-center justify-center text-2xl" />
                 )
             }
           {/* Placeholder previews */}
@@ -355,7 +355,7 @@ function AddProperty() {
               <img
                 key={ind}
                 src={item}
-                className="w-20 h-20 bg-gray-800 rounded border border-gray-700 cursor-pointer"
+                className="w-20 h-20 bg-[#171717] rounded border border-gray-700 cursor-pointer"
                 onClick={() => {
                   setForm(prev => ({
                     ...prev,
@@ -375,7 +375,7 @@ function AddProperty() {
       <div className="pt-4">
         <button 
         onSubmit={handleSubmit}
-        type="submit" className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded font-semibold">
+        type="submit" className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded font-semibold cursor-pointer">
           {formLoading 
           ? 
           <ClipLoader

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 body {
   margin: 0;
   padding: 0;
@@ -21,6 +22,9 @@ body {
   --foreground: #D6FAFA;
 }
 
+.input-style {
+  @apply bg-[#171717] p-3 rounded border border-gray-700;
+}
 .gradinet-bd{
   background: #020024;
   background: radial-gradient(circle,rgba(2, 0, 36, 1) 0%, rgba(19, 19, 99, 1) 50%, rgba(2, 0, 36, 1) 100%);

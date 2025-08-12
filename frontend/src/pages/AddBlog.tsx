@@ -86,7 +86,7 @@ function AddBlog() {
           placeholder="Title*"
           value={formData.title}
           onChange={handelTitleChange}
-          className="w-full bg-gray-800 p-3 rounded border border-gray-700"
+          className="w-full bg-[#262626] p-3 rounded border border-gray-700"
         />
     <TipTap handleHtmlSave={handleHtmlSave} editor={editor}/>
 

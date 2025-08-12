@@ -11,10 +11,7 @@ function PropertyData({data} : {data : PropertyFull}) {
     <>
     <div className="flex justify-end">
     <Link 
-    className="text-gray-800 font-semibold
-    bg-white px-2 py-1 rounded-sm cursor-pointer
-    hover:bg-gray-300 transition-colors ease-in-out
-    duration-200"
+    className="text-gray-200 bg-[#171717] font-semibold px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-[#121212] transition-colors ease-in-out duration-200 border-2 border-white"
     to={`/propertys/edit-property/${data._id}`} >
       Edit Property
     </Link>

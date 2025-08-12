@@ -361,7 +361,7 @@ function TipTap({ handleHtmlSave, editor }: TipTapProp) {
 
       <div className="flex justify-end">
         <button
-          className="flex gap-2 items-center my-2 mr-2 bg-amber-200 rounded-sm cursor-pointer px-2 py-1 border border-gray-200 text-gray-600 hover:bg-amber-100"
+          className="flex gap-2 items-center my-2 mr-2 bg-[#262626] rounded-sm cursor-pointer px-2 py-1 text-white hover:bg-[#161414]"
           onClick={passhtmlContent}
         >
           <MdDownloadDone />

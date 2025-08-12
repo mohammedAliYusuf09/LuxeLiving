@@ -7,7 +7,7 @@ const ImageGallery = ({images} : {images : string[]}) => {
   },[images])
 
   return (
-    <div className="bg-[#14131b] p-4 rounded-lg">
+    <div className="bg-[#171717] p-4 rounded-lg">
       <div className="w-full h-[400px] mb-4">
         <img 
           style={{width: "100%"}}
@@ -18,7 +18,7 @@ const ImageGallery = ({images} : {images : string[]}) => {
       </div>
 
       <div className="grid grid-cols-5 gap-3">
-        {images.slice(1).map((img, index) => (
+        {images.map((img, index) => (
           <div
             key={index}
             className={`cursor-pointer overflow-hidden rounded-md border-2 ${

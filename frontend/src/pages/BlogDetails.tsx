@@ -40,10 +40,14 @@ function BlogDetails() {
             <div>
                 <h1 className="text-3xl font-semibold mb-6">{data.title}</h1>
                 <div className="html-content" dangerouslySetInnerHTML={{ __html: data.htmlBody }} />
-                <Link to={`/blogs/edit/${data._id}`}
-                  className="bg-blue-400 px-2 py-1 rounded-md cursor-pointer mt-2 hover:bg-blue-600 transition-colors ease-in-out duration-150"
+                <div className="mt-6">
+                  <Link to={`/blogs/edit/${data._id}`}
+                  className="text-gray-200 bg-[#171717] mt-6 font-semibold px-2 py-1 rounded-md cursor-pointer 
+                  hover:bg-gray-300 hover:text-[#121212] transition-colors ease-in-out duration-200 border-2 border-white"
                   >Edit Blog
                 </Link>
+                </div>
+                
             </div>
         )
       }else{
