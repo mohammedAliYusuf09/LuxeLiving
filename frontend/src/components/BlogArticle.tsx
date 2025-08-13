@@ -10,6 +10,11 @@ export interface Blog {
 function BlogArticle({ post }: Blog) {
   const notify = (message: string) => toast(message);
 
+  const date = new Date(post.createdAt);
+ 
+// Example: "8/8/2025" (in a US locale)
+const readableDateTime = date.toLocaleString();
+
   const deleteBlog = async () => {
     axios.defaults.withCredentials = true;
     const response = await axios.delete(
@@ -37,15 +42,15 @@ function BlogArticle({ post }: Blog) {
 
   return (
     <article className="p-6 bg-[#171717] rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-800">
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
         <h2 className="text-xl font-semibold text-white line-clamp-2">
           {post.title}
         </h2>
         <time
-          className="text-sm text-gray-500 whitespace-nowrap ml-4"
+          className="text-sm text-gray-500 whitespace-nowrap sm:ml-4"
           dateTime={new Date(post.createdAt).toISOString()}
         >
-          {post.createdAt}
+          {readableDateTime}
         </time>
       </div>
 

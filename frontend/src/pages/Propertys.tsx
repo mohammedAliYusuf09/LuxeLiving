@@ -1,16 +1,17 @@
 import LoadingPropertyCard from "../components/LoadingPropertyCard";
 import PropertyCard from "../components/PropertyCard";
-import PropertyHeader from "../components/PropertyHeader";
-import PropertysText from "../components/PropertysText";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { type property } from "../lib/types";
 import { type filterProps } from "../lib/types";
+import { Link } from "react-router-dom";
+import FilterButton from "@/components/FilterButton";
 
 
 
 function Propertys() {
+
 
   const [filters, setFilters] = useState<filterProps>({
     propertyType: '',
@@ -56,19 +57,33 @@ function Propertys() {
 
   return (
     <div className="overflow-hidden">
-      <PropertyHeader filter={filters} setFilters={setFilters} onChange={handleOnChange}/>
-      <PropertysText />
+      <div className="flex justify-between">
+        <FilterButton
+          onChange={handleOnChange}
+          filter={filters}
+          setFilters={setFilters}
+        />
+        <div className="flex items-start justify-start">
+          <Link
+            className="text-gray-200  bg-[#171717] font-semibold px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-[#121212] transition-colors ease-in-out duration-200 border-2 border-white"
+            to={"/propertys/add-property"}
+          >
+            Add Property
+          </Link>
+        </div>
+      </div>
 
       {/* Conditional rendering based on loading, error, and data */}
       {isLoading ? (
-        <div className="flex flex-col gap-4 mt-4"> 
-        <LoadingPropertyCard />
-        <LoadingPropertyCard />
-        <LoadingPropertyCard />
+        <div className="flex flex-col gap-4 mt-4">
+          <LoadingPropertyCard />
+          <LoadingPropertyCard />
+          <LoadingPropertyCard />
         </div>
-        
       ) : error ? (
-        <div className="text-red-500 mt-4 text-center">{error ? error.toString() : "An error occurred."}</div>
+        <div className="text-red-500 mt-4 text-center">
+          {error ? error.toString() : "An error occurred."}
+        </div>
       ) : Array.isArray(data) && data.length > 0 ? (
         <div className="flex flex-col gap-4 mt-4">
           {data.map((propertyItem: property) => (
@@ -77,7 +92,9 @@ function Propertys() {
           ))}
         </div>
       ) : (
-        <div className="mt-4 text-center text-gray-600">No properties found.</div>
+        <div className="mt-4 text-center text-gray-600">
+          No properties found.
+        </div>
       )}
     </div>
   );

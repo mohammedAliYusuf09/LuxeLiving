@@ -34,10 +34,10 @@ function FilterButton({ onChange, filter, setFilters }: PropertyHeaderProps) {
 
   return (
     <div>
-      <div className="flex mt-3 items-center gap-1 cursor-pointer hover:text-stone-300"
+      <div className="flex mt-1 items-center gap-1 cursor-pointer hover:text-stone-300"
       onClick={handelFilterClick}
       >
-          <p>Filter</p>
+          <p className="text-xl xl:text-2xl">Filter</p>
           <span className="text-sm"><FaFilter /></span>
       </div>
 
@@ -46,7 +46,7 @@ function FilterButton({ onChange, filter, setFilters }: PropertyHeaderProps) {
         className="mt-6"
       >
         <div className="">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-4">
           <select
           name="propertyType"
           value={filter.propertyType}

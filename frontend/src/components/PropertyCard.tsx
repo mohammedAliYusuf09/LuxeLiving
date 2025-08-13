@@ -2,11 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { type property } from "../lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
 
 function PropertyCard({ propertyItem }: { propertyItem: property }) {
 
-  const [delOn, setDelOn] = useState(false);
+
 
   const deleteProperty = async () => {
     axios.defaults.withCredentials = true;
@@ -36,14 +35,12 @@ function PropertyCard({ propertyItem }: { propertyItem: property }) {
   };
 
   return (
-    <div className="flex gap-4 h-80 bg-[#171717] items-center p-4"
-    onMouseEnter={() => setDelOn(true)}
-    onMouseLeave={() => setDelOn(false)}
+    <div className="flex flex-col sm:flex-row gap-4 sm:h-80 bg-[#171717] sm:items-center p-4"
     >
       {/* // image */}
-      <div className="h-full w-[40%]">
+      <div className="sm:h-full sm:w-[40%]">
         <img
-          className="h-full w-full object-cover hover:scale-105 cursor-pointer transition-all ease-in-out duration-200"
+          className="sm:h-full sm:w-full object-cover hover:scale-105 cursor-pointer transition-all ease-in-out duration-200"
           src={propertyItem.images[0]}
           alt={propertyItem.title}
           onClick={handelCardClidk}
@@ -51,30 +48,30 @@ function PropertyCard({ propertyItem }: { propertyItem: property }) {
       </div>
 
       {/* contents */}
-      <div className="w-[60%] flex flex-col gap-4">
+      <div className="sm:w-[60%] flex flex-col gap-2 md:gap-4">
         {/* title */}
-        <h4 className="text-4xl font-bold leading-10 cursor-pointer hover:underline transition-all ease-in-out duration-200"
+        <h4 className="text-2xl leading-7 md:text-3xl md:leading-10 xl:text-4xl xl:leading-15 font-bold  cursor-pointer hover:underline transition-all ease-in-out duration-200"
         onClick={handelCardClidk}
         >
           {propertyItem.title}
           </h4>
         {/* features */}
-        <div className="flex gap-2">
-          <p className="text-xl font-semi-bold">
+        <div className="flex gap-2 text-lg md:text-xl xl:text-2xl">
+          <p className="font-semi-bold">
             {propertyItem.bathrooms} bedrooms
           </p>
-          <p className="text-xl font-semi-bold">
+          <p className="font-semi-bold">
             {propertyItem.bathrooms} bathrooms
           </p>
-          <p className="text-xl font-semi-bold">{propertyItem.size} </p>
+          <p className="font-semi-bold">{propertyItem.size} </p>
         </div>
         {/* price & lable */}
-        <div className="flex gap-2">
-          <p className="text-lg font-normal">${propertyItem.price}</p>
-          <p className="text-lg font-normal bg-[#262626] px-2 rounded-lg">{propertyItem.status}</p>
-          {delOn && <p className="text-lg font-normal bg-[#262626] px-2 rounded-lg text-red-400 cursor-pointer hover:text-red-800 transition-colors ease-in-out duration-150"
+        <div className="flex gap-2 text-lg md:text-xl xl:text-2xl">
+          <p className="font-semi-bold">${propertyItem.price}</p>
+          <p className="font-normal bg-[#262626] px-2 rounded-lg">{propertyItem.status}</p>
+          <p className="text-lg font-normal bg-[#262626] px-2 rounded-lg text-red-400 cursor-pointer hover:text-red-800 transition-colors ease-in-out duration-150"
           onClick={() => mutate()}
-          >delete</p>}
+          >delete</p>
         </div>
       </div>
     </div>
