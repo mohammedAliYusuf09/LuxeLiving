@@ -52,6 +52,38 @@ const sendMessageToAgent = async (req, res) => {
 }
 
 // Unauthorized 
+const getOneClientMessageById = async (req, res) => {
+    const { email } = req.agent;
+    if (!email) {
+        return res.status(401).json({ success: false, message: "Unauthorized" });
+    } 
+
+    const { id } = req.params;
+    
+    if (!id) {
+        return res
+        .status(400)
+        .json({ success: false, message: "Message ID is required" });
+    }
+
+    try {
+        const message = await Message.findById(id);
+
+        if (!message) {
+        return res
+            .status(404)
+            .json({ success: false, message: "Message not found" });
+        }
+
+    return res.status(200).json({ success: true, message });
+    } catch (error) {
+        console.error("Error fetching message:", error);
+        return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }  
+}
+
 const getAllMessages = async (req, res) => {
     const { email } = req.agent;
     if (!email) {
@@ -60,8 +92,8 @@ const getAllMessages = async (req, res) => {
     try {
         const messages = await Message.find();
         if (messages.length === 0) {
-  return res.status(404).json({ success: false, message: "No messages found" });
-}
+        return res.status(404).json({ success: false, message: "No messages found" });
+        }
         return res
             .status(200)
             .json({ success: true, message: "Gatting Messages successfully", messages});
@@ -113,48 +145,62 @@ const resopndClient = async (req, res) => {
 }
 
 const mailToAllClient = async (req, res) => {
-
     const { email } = req.agent;
-
     if (!email) {
     return res.status(401).json({ success: false, message: "Unauthorized" });
     }
-
     const { subject, message} = req.body;
-
     if(!subject || !message){
         return res.status(300).json({ success: false, message: "Fill all the filds currect" });
     }
-
     try {
         const clientsEmail = await Client.distinct('email');
-
-        console.log(clientsEmail); 
-    
         if (!clientsEmail || clientsEmail.length === 0) {
             return res
             .status(403)
             .json({ success: false, message: "No client emails found" });
             }
-        
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: clientsEmail,
             subject: subject,
             text: message
         };    
-    
         await transporter.sendMail(mailOptions);
-    
         return res
-                .status(200)
-                .json({ success: true, message: "You have send a mail all you client" });
-    
+            .status(200)
+            .json({ success: true, message: "You have send a mail all you client" });
     } catch (error) {
         return res.status(400).json({success: false, message: "Internal server error"});
     }
 
 }
+
+const allClients = async (req, res) => {
+    const { email } = req.agent;
+
+    if (!email) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    try {
+        const clients = await Client.find();
+        if(!clients || clients.length == 0) {
+            return res.status(403).json({ success: false, message: "No client found" });
+        }
+
+        return res.status(200).json({ success: true, message: "Clients found successfully", clients });
+    } catch (error) {
+        return res.status(400).json({success: false, message: "Internal server error"});
+    }
+}
+
+
+
+
+
+
+
 
 
 
@@ -162,5 +208,7 @@ export {
     sendMessageToAgent,
     getAllMessages,
     resopndClient,
-    mailToAllClient
+    mailToAllClient,
+    getOneClientMessageById,
+    allClients
 }

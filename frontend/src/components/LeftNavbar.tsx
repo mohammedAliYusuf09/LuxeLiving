@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { LuHouse } from "react-icons/lu";
 import { FaBlog } from "react-icons/fa6";
-import { FiMessageSquare } from "react-icons/fi";
+import { MdPerson } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 
 const LeftNavbar = () => {
@@ -24,11 +24,11 @@ const LeftNavbar = () => {
           Blogs
           </span>
         </NavLink>
-        <NavLink to="/messages" 
+        <NavLink to="/clients" 
         className="hover:bg-[#262626] p-3 rounded-md text-gray-200">
           <span className="flex items-center gap-2">
-          <FiMessageSquare />
-          Messages
+          <MdPerson />
+          Clients
           </span>
         </NavLink>
         <NavLink to="/settings" 

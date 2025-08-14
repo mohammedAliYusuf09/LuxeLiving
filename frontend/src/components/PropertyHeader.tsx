@@ -5,7 +5,7 @@ import { MdMenuOpen, MdClose } from "react-icons/md";
 import {  FaBlog } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { LuHouse } from "react-icons/lu";
-import { FiMessageSquare } from "react-icons/fi";
+import { MdPerson } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 
 function PropertyHeader() {
@@ -102,13 +102,13 @@ function PropertyHeader() {
 
 
                   <NavLink
-                    to="/messages"
+                    to="/clients"
                     className="hover:bg-[#262626] p-2 text-2xl font-semibold rounded-md text-gray-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <span className="flex items-center gap-2">
-                      <FiMessageSquare />
-                      Messages
+                      <MdPerson />
+                      Clients
                     </span>
                   </NavLink>
 

@@ -103,3 +103,28 @@ export interface User {
   email: string;
   // Add more fields as required
 }
+
+export interface Message {
+  email: string;
+  name: string;
+  message: string;
+  __v: number;
+  _id: string;
+  firstRespond: string
+  // Add more fields as required
+}
+
+export interface Client {
+  email: string;
+  name: string;
+  createdAt: string,
+  updatedAt: string,
+  __v: number;
+  _id: string;
+  // Add more fields as required
+}
+
+export interface Email {
+  subject: string;
+  message: string;
+}

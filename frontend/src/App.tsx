@@ -5,7 +5,6 @@ import Settings from "./pages/Settings";
 import Layout from "./pages/Layout";
 import Blogs from "./pages/Blogs";
 import Propertys from "./pages/Propertys";
-import Messages from "./pages/Messages";
 import AddProperty from "./pages/AddProperty";
 import PropertyDetails from "./pages/PropertyDetails";
 import EditProperty from "./pages/EditProperty";
@@ -13,6 +12,8 @@ import AddBlog from "./pages/AddBlog";
 import BlogDetails from "./pages/BlogDetails";
 import EditBlog from "./pages/EditBlog";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import Clients from "./pages/Clients";
+import SendMail from "./pages/SendMail";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -44,7 +45,8 @@ function App() {
           <Route path="/blogs/add-blog" element={<AddBlog />} />
           <Route path="/blogs/details/:id" element={<BlogDetails />} />
           <Route path="/blogs/edit/:id" element={<EditBlog />} />
-          <Route path="/messages" element={<Messages />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/clients/sendmail" element={<SendMail />} />
           <Route path="/settings" element={<Settings />} />
           {/* Add more routes as needed */}
         </Route>

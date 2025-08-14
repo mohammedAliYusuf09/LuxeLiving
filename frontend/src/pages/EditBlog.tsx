@@ -40,7 +40,6 @@ function EditBlog() {
     htmlBody: blog?.htmlBody || "",
   });
 
-  console.log("formData", formData);
 
   const editor = useEditor({
     extensions: [StarterKit, Image], // define your extension array
