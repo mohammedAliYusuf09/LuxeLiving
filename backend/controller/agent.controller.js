@@ -231,6 +231,7 @@ const saveNewPassword = async (req, res) => {
 // reset password functionality
 
 const resetPassword = async (req, res) => {
+    
     const {oldPassword, newPassword} = req.body;
     const {email} = req.agent;
 
@@ -241,20 +242,20 @@ const resetPassword = async (req, res) => {
 
     // validate new password
     if(!validator.isStrongPassword(newPassword)){
-        return res.status(400).json({success: false, message: "Please provide a strong password"});
+        return res.status(402).json({success: false, message: "Please provide a strong password"});
     }
 
     // find agent by email
     const agent = await Agent.findOne({ email});
     if(!agent) {
-        return res.status(400).json({success: false, message: "Agnet does not exist"});
+        return res.status(403).json({success: false, message: "Agnet does not exist"});
     }
 
     // compare old password
     const isPasswordValid = await bcrypt.compare(oldPassword, agent.password);
 
     if(!isPasswordValid) {
-        return res.status(400).json({success: false, message: "Password is incorrect"});
+        return res.status(401).json({success: false, message: "Password is incorrect"});
     }
 
     // hash new password

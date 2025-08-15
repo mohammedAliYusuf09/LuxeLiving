@@ -128,3 +128,8 @@ export interface Email {
   subject: string;
   message: string;
 }
+
+export interface ResetPassword {
+  oldPassword: string;
+  newPassword: string
+}
