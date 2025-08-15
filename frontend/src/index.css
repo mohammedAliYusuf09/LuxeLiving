@@ -20,6 +20,7 @@ body {
   --radius: 0.625rem;
   --background: #171821;
   --foreground: #D6FAFA;
+  --card: #171821;
 }
 
 .input-style {

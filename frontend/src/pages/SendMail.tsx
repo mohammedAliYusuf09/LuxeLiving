@@ -53,10 +53,6 @@ function SendMail() {
         notify(error.message || "An error occurred");
       },
   });
-
-
-  
-  
   
   return (
     <>

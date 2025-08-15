@@ -14,6 +14,8 @@ import EditBlog from "./pages/EditBlog";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Clients from "./pages/Clients";
 import SendMail from "./pages/SendMail";
+import ChangePassword from "./pages/ChangePassword";
+import ChangeEmail from "./pages/ChangeEmail";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -48,6 +50,8 @@ function App() {
           <Route path="/clients" element={<Clients />} />
           <Route path="/clients/sendmail" element={<SendMail />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/settings/change-password" element={<ChangePassword />} />
+          <Route path="/settings/change-email" element={<ChangeEmail />} />
           {/* Add more routes as needed */}
         </Route>
       )}

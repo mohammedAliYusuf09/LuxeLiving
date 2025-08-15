@@ -124,7 +124,7 @@ const logoutAgent = async(req, res) => {
 
 // forget password functionality
 
-const forgetPassword = async (req, res) => {
+const sendOtpviaEmail = async (req, res) => {
     // get email fom request body
     const {email} = req.agent;
 
@@ -192,7 +192,6 @@ const validateOtp = async (req, res) => {
 
     // OTP is valid
     return res.status(200).json({success: true, message: "OTP is valid"});
-
 }
 
 
@@ -294,7 +293,7 @@ export{
     signUpAgent,
     logInAgent,
     logoutAgent,
-    forgetPassword,
+    sendOtpviaEmail,
     validateOtp,
     saveNewPassword,
     resetPassword,
