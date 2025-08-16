@@ -99,8 +99,6 @@ function TipTap({ handleHtmlSave, editor }: TipTapProp) {
         }
       );
 
-      console.log(response);
-
       if (response?.data.url) {
         if (!editor) {
           console.warn("Editor not initialized.");
@@ -118,7 +116,6 @@ function TipTap({ handleHtmlSave, editor }: TipTapProp) {
   const passhtmlContent = () => {
     if(editor){
       const htmlContent = editor.getHTML();
-      console.log(htmlContent);
       handleHtmlSave(htmlContent)
     }
   }
@@ -375,8 +372,3 @@ function TipTap({ handleHtmlSave, editor }: TipTapProp) {
 
 export default TipTap;
 
-// onClick={() => {
-//           if (editor) {
-//             console.log(editor.getHTML());
-//           }
-//         }}

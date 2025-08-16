@@ -57,7 +57,7 @@ function EditProperty() {
         setError(null);
 
         try {
-          const response = await axios.put(
+          await axios.put(
             `http://localhost:3000/api/v1/property/update-property/${property?._id}`,
             form, 
             {
@@ -67,7 +67,6 @@ function EditProperty() {
             withCredentials: true,
         }
           );
-          console.log(response.data);
           setformLoading(false);
           setForm({
             title: "",
@@ -130,8 +129,6 @@ function EditProperty() {
             withCredentials: true,
         }
         );
-
-    console.log("Uploaded Successfully", response.data);
     setForm(prev => ({
             ...prev,
             images: [...prev.images,  response.data.url,]

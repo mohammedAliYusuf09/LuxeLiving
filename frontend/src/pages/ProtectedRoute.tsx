@@ -30,7 +30,6 @@ function ProtectedRoute() {
           const { data } = await axios.get<LogdinProp | LogdinErroProp>(
             "http://localhost:3000/api/v1/agent/is-logedin"
           );
-          console.log(data);
           if(data.success){
             setIsAuthenticated(data.success);
             // Only set user if `user` exists

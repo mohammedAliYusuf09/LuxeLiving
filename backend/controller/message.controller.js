@@ -28,7 +28,7 @@ const sendMessageToAgent = async (req, res) => {
         }
         const client = await Client.create(newClient)
         if(!client){
-            console.log("Client is not created Log sayes");
+            return res.status(300).json({success: false, message: 'client is not created'});
         }
 
         const newMessage = {
@@ -40,7 +40,7 @@ const sendMessageToAgent = async (req, res) => {
         const createdMessage = await Message.create(newMessage)
 
         if(!createdMessage){
-            console.log("message saved to database is not created Log sayes");
+            return res.status(300).json({success: false, message: 'message is not created'});
         }
 
         return res.status(200).json({success: true, message: "You have send a message",});

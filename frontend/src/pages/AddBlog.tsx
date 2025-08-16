@@ -47,8 +47,6 @@ function AddBlog() {
          setLoading(false)
        },
        onError: (error:AxiosError) => {
-             console.log("Blog could not be Added");
-            //  notify(error.message || "An error occurred");
             notifyError(error.message || "An error occurred");
            },
     });
@@ -64,9 +62,6 @@ function AddBlog() {
   }
 
   const handleHtmlSave = (body: string) => {
-    console.log(body);
-    console.log('hello');
-    
     setFromData(pre => ({
       ...pre,
       htmlBody: body

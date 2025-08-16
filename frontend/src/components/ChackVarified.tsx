@@ -55,7 +55,6 @@ export function ChackVarified({setVarified}: setCarified) {
           notifySuccess(responseData.message);
           },
           onError: (error:AxiosError) => {
-            console.log("Blog could not be Added");
             notifyError(error.message || "An error occurred");
           },
 

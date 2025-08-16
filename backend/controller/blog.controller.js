@@ -2,11 +2,8 @@ import { uploadOnCloudinary } from "../config/cloudinary.js";
 import { Blog } from "../model/blog.model.js";
 
 const uploadBlogImage = async (req, res) => {
-  console.log(req);
   const { email } = req.agent;
   const image = req.file;
-
-  console.log("Image", image);
 
   if (!email) {
     return res.status(401).json({ success: false, message: "Unauthorized" });

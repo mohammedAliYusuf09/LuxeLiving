@@ -59,7 +59,6 @@ function AddProperty() {
             withCredentials: true,
         }
           );
-          console.log(response.data);
           setformLoading(false);
           setForm({
             title: "",
@@ -123,8 +122,6 @@ function AddProperty() {
             withCredentials: true,
         }
         );
-
-    console.log("Uploaded Successfully", response.data);
     setForm(prev => ({
             ...prev,
             images: [...prev.images,  response.data.url,]

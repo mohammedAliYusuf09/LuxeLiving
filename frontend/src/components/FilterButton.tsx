@@ -16,7 +16,6 @@ function FilterButton({ onChange, filter, setFilters }: PropertyHeaderProps) {
 
   const handelFilterClick = () => {
     setOpen(true)
-    console.log("hello filter clicked", isOpen);
   }
 
   const calselFilter = () => {

@@ -13,25 +13,6 @@ import { notifyError, notifySuccess } from "@/lib/tostCollection";
 function EditBlog() {
   const { id } = useParams<{ id: string }>(); // Get the ID from URL params
 
-  // const getBlogDetails = async (): Promise<Blog> => {
-  //   try {
-  //     axios.defaults.withCredentials = true;
-  //     const response = await axios.get(
-  //       `http://localhost:3000/api/v1/blog/get-details/${id}`
-  //     );
-  //     console.log("API Response:", response);
-  //     return response.data.blog;
-  //   } catch (error) {
-  //     console.error("Error fetching blog details:", error);
-  //     throw error; // Important to re-throw for React Query to catch
-  //   }
-  // };
-
-  // const { error, data } = useQuery({
-  //   queryKey: ["blogUpdate", id],
-  //   queryFn: getBlogDetails,
-  // });
-
   const { blog } = useBlogStore();
   const navigate = useNavigate();
 
@@ -69,15 +50,13 @@ function EditBlog() {
         title: "",
         htmlBody: "",
       });
-      // notify(responseData.message);
       notifySuccess(responseData.message);
       editor.chain().focus().clearContent().run();
       setLoading(false);
       navigate(-2);
     },
     onError: (error: AxiosError) => {
-      console.log("Blog could not be Updated");
-      // notify(error.message || "An error occurred");
+
       notifyError(error.message || "An error occurred");
     },
   });
@@ -91,8 +70,6 @@ function EditBlog() {
   };
 
   const handleHtmlSave = (body: string) => {
-    console.log(body);
-    console.log("hello");
     setFromData((pre) => ({
       ...pre,
       htmlBody: body,

@@ -33,7 +33,6 @@ export function ChangePassCard() {
     }
 
   const resetPassword = async () => {
-    console.log(form);
     axios.defaults.withCredentials = true;
     const response = await axios.post(
       `http://localhost:3000/api/v1/agent/reset-password`,

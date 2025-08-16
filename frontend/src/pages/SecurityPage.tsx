@@ -27,8 +27,6 @@ function SecurityPage() {
         "http://localhost:3000/api/v1/agent/login",
         { password }
       );
-      // Assuming the response contains a token or auth status
-      console.log("Login success:", response.data.agent);
       setIsAuthenticated(true);
       // useAuthStore.getState().setIsAuthenticated(true);
       setUser(response.data.agent);

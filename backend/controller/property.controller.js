@@ -56,8 +56,6 @@ const addProperty = async (req, res) => {
     return res.status(300).json( { success: false, message: "At least one image is required" });
   }
 
-   console.log(req.body.status);
-
 
   /// create a new property
   const newProperty = {

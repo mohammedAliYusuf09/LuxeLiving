@@ -45,13 +45,10 @@ function SendMail() {
         subject: "",
         message: ""
       })
-      // notify(responseData.message);
       notifySuccess(responseData.message);
       navigate(-1);
       },
       onError: (error:AxiosError) => {
-        console.log("Blog could not be Added");
-        // notify(error.message || "An error occurred");
         notifyError(error.message || "An error occurred");
       },
   });

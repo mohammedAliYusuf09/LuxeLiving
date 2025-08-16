@@ -20,7 +20,6 @@ const readableDateTime = date.toLocaleString();
     const response = await axios.delete(
       `http://localhost:3000/api/v1/blog/delete/${post._id}`
     );
-    console.log(response.data);
     return response.data;
   };
 
@@ -31,11 +30,9 @@ const readableDateTime = date.toLocaleString();
     onSuccess: (responseData) => {
       // responseData is passed directly to onSuccess
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
-      console.log(responseData.message);
       notify(responseData.message);
     },
     onError: (error:AxiosError) => {
-      console.log("Blog could not be deleted");
       notify(error.message || "An error occurred");
     },
   });
