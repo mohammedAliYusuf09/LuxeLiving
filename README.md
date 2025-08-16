@@ -1,6 +1,6 @@
 # 🏆 LuxeLiving - Real Estate Agent Management System
 
-![Admin Dashboard Preview](https://via.placeholder.com/1200x600.png?text=LuxeLiving+Admin+Dashboard)
+![Admin Dashboard Preview](https://res-console.cloudinary.com/dgyklfrbd/thumbnails/v1/image/upload/v1755320560/MDkuMDguMjAyNV8yMS4xNS4zMV9SRUNfbGtqZ3d4/drilldown)
 
 > Powerful admin panel for real estate professionals to manage properties, clients, and content
 
@@ -40,7 +40,7 @@
 Building LuxeLiving provided valuable experience in:
 - Implementing **role-based access control** for different agent permissions
 - Creating **RESTful APIs** for property/blog CRUD operations
-- Developing **secure authentication** with NextAuth and JWT
+- Developing **secure authentication** with JWT
 - Designing **responsive dashboards** with complex data tables
 - Integrating **third-party services** like Cloudinary for media management
 - Optimizing **MongoDB queries** for real estate data structures
@@ -60,9 +60,9 @@ Building LuxeLiving provided valuable experience in:
 - Automated reminders reduce missed follow-ups by 40%
 
 ## 📬 Contact
-Have questions or want to contribute? Reach out!
+Have questions or need somthing like this Reach out!
 
 - **Developer**: Mohammed Ali Yusuf
-- **Email**: [Your Professional Email]
-- **LinkedIn**: [Your LinkedIn Profile URL]
+- **Email**: isaihmed09@gmail.com
+- **LinkedIn**: [\[Your LinkedIn Profile URL\]](https://www.linkedin.com/in/mohammad-yusuf-302819210/)
 - **Project Repository**: https://github.com/mohammedAliYusuf09/LuxeLiving
