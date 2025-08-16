@@ -45,7 +45,7 @@ function FilterButton({ onChange, filter, setFilters }: PropertyHeaderProps) {
         className="mt-6"
       >
         <div className="">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
           <select
           name="propertyType"
           value={filter.propertyType}

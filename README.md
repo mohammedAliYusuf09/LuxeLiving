@@ -1,6 +1,6 @@
 # 🏆 LuxeLiving - Real Estate Agent Management System
 
-![Admin Dashboard Preview](./frontend/public/09.08.2025_21.15.31_REC.png)
+![Admin Dashboard Preview](./frontend/public/luss.png)
 
 > Powerful admin panel for real estate professionals to manage properties, clients, and content
 
