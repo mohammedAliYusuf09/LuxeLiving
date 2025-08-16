@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { type property } from "../lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { notifySuccess } from "@/lib/tostCollection";
 
 function PropertyCard({ propertyItem }: { propertyItem: property }) {
 
@@ -22,9 +23,10 @@ function PropertyCard({ propertyItem }: { propertyItem: property }) {
     onSuccess: () => {
       // Optionally refetch or update query cache
       queryClient.invalidateQueries({ queryKey: ["propertys"] });
+      notifySuccess("Property deleted successfully");
     },
     onError: () => {
-      console.log("Property Could not be deleted");
+      notifySuccess("Property Could not be deleted");
     },
   });
 

@@ -3,12 +3,12 @@ import TipTap from "../components/TipTap";
 import type { BlogInterface } from "../lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { toast, ToastContainer } from "react-toastify";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogStore } from "../store/useBlogStore";
+import { notifyError, notifySuccess } from "@/lib/tostCollection";
 
 function EditBlog() {
   const { id } = useParams<{ id: string }>(); // Get the ID from URL params
@@ -46,8 +46,6 @@ function EditBlog() {
     content: formData?.htmlBody, // initial content
   });
 
-  const notify = (message: string) => toast(message);
-
   const [isLoading, setLoading] = useState(false);
 
   const updateBlog = async () => {
@@ -71,14 +69,16 @@ function EditBlog() {
         title: "",
         htmlBody: "",
       });
-      notify(responseData.message);
+      // notify(responseData.message);
+      notifySuccess(responseData.message);
       editor.chain().focus().clearContent().run();
       setLoading(false);
-      navigate("/blogs");
+      navigate(-2);
     },
     onError: (error: AxiosError) => {
       console.log("Blog could not be Updated");
-      notify(error.message || "An error occurred");
+      // notify(error.message || "An error occurred");
+      notifyError(error.message || "An error occurred");
     },
   });
 
@@ -118,8 +118,6 @@ function EditBlog() {
       >
         {isLoading ? "Updating..." : "Update Blog"}
       </button>
-
-      <ToastContainer position="bottom-right" theme="dark" />
     </>
   );
 }

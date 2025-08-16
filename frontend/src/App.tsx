@@ -16,11 +16,27 @@ import Clients from "./pages/Clients";
 import SendMail from "./pages/SendMail";
 import ChangePassword from "./pages/ChangePassword";
 import ChangeEmail from "./pages/ChangeEmail";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
 
   return (
+    <>
+
+    <ToastContainer 
+    position="top-center"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="dark"
+    />
+
     <Routes>
       {/* Public Route */}
       <Route
@@ -61,6 +77,8 @@ function App() {
         <Route path="*" element={<Navigate to="/protected" />} />
       )}
     </Routes>
+    </>
+    
   );
 }
 

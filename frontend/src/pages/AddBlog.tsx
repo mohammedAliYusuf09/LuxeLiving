@@ -3,10 +3,10 @@ import TipTap from "../components/TipTap";
 import type { BlogInterface } from "../lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { toast, ToastContainer } from "react-toastify";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
+import { notifyError, notifySuccess } from "@/lib/tostCollection";
 
 
 function AddBlog() {
@@ -19,8 +19,6 @@ function AddBlog() {
     title: "",
     htmlBody: ""
   });
-
-  const notify = (message: string) => toast(message);
 
   const [isLoading, setLoading] = useState(false);
 
@@ -43,13 +41,15 @@ function AddBlog() {
           title: "",
           htmlBody: ""
         })
-         notify(responseData.message);
+        //  notify(responseData.message);
+        notifySuccess(responseData.message);
          editor.chain().focus().clearContent().run();
          setLoading(false)
        },
        onError: (error:AxiosError) => {
              console.log("Blog could not be Added");
-             notify(error.message || "An error occurred");
+            //  notify(error.message || "An error occurred");
+            notifyError(error.message || "An error occurred");
            },
     });
      
@@ -99,11 +99,6 @@ function AddBlog() {
         isLoading  ? "Uploading..." : "Create Blog"
       }
       </button>
-
-      <ToastContainer 
-        position= "bottom-right"
-        theme="dark"
-        />
     </>
   );
 }

@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
-import { ToastContainer, toast } from 'react-toastify';
 import type { PropertyForm } from "../lib/types";
 import { propertyStore } from "../store/propertyStore";
 import { useNavigate } from "react-router-dom";
+import { notifySuccess } from "@/lib/tostCollection";
 
 // const override: CSSProperties = {
 //   display: "block",
@@ -42,10 +42,6 @@ function EditProperty() {
     const [error, setError] = useState<string | null>(null);
 
     const navigate = useNavigate();
-
-    const notify = () => toast("Peoperty Successfully Added");
-
-
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -91,7 +87,7 @@ function EditProperty() {
             lng: "",
             images: [],
           });
-          notify();
+          notifySuccess('Property updated successfully');
           navigate('/propertys')
         } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
@@ -393,10 +389,6 @@ function EditProperty() {
             /> 
           :"Update Property"}
         </button>
-        <ToastContainer 
-        position= "bottom-center"
-        theme="dark"
-        />
       </div>
     </form>
   );

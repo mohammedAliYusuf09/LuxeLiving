@@ -8,12 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { notifyError, notifySuccess } from "@/lib/tostCollection";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { TfiClose } from "react-icons/tfi"
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 
 interface setCarified {
     setVarified: React.Dispatch<React.SetStateAction<boolean>>
@@ -21,7 +21,6 @@ interface setCarified {
 
 
 export function ChackVarified({setVarified}: setCarified) {
-    const notify = (message: string) => toast(message);
     const navigate = useNavigate();
     const [mailSend, setMailSend] = useState(false);
     const [otp, setOtp] = useState('');
@@ -52,11 +51,12 @@ export function ChackVarified({setVarified}: setCarified) {
             // Optionally refetch or update query cache
             queryClient.invalidateQueries({ queryKey: ["sendOtp"] });
             setMailSend(true);
-          notify(responseData.message);
+          // notify(responseData.message);
+          notifySuccess(responseData.message);
           },
           onError: (error:AxiosError) => {
             console.log("Blog could not be Added");
-            notify(error.message || "An error occurred");
+            notifyError(error.message || "An error occurred");
           },
 
       });
@@ -66,10 +66,12 @@ export function ChackVarified({setVarified}: setCarified) {
           onSuccess: (responseData) => {
             // Optionally refetch or update query cache
             queryClient.invalidateQueries({ queryKey: ["varifyOtp"] });
-            notify(responseData.message);
+            // notify(responseData.message);
+            notifySuccess(responseData.message);
           },
           onError: (error:AxiosError) => {
-            notify(error.message || "An error occurred");
+            // notify(error.message || "An error occurred");
+            notifyError(error.message || "An error occurred");
           },
       });
 
@@ -125,7 +127,6 @@ export function ChackVarified({setVarified}: setCarified) {
           </form>
         </CardFooter>
       )}
-      <ToastContainer position="bottom-right" theme="dark" />
     </Card>
   );
 }

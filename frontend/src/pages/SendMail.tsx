@@ -1,16 +1,15 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { notifyError, notifySuccess } from "@/lib/tostCollection"
 import type { Email } from "@/lib/types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import type { AxiosError } from "axios"
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { toast, ToastContainer } from "react-toastify"
 
 function SendMail() {
-  const notify = (message: string) => toast(message);
   const navigate = useNavigate();
   // create a use state and get input and textarea value on change
   const [mail, setMail] = useState<Email>({
@@ -46,11 +45,14 @@ function SendMail() {
         subject: "",
         message: ""
       })
-      notify(responseData.message);
+      // notify(responseData.message);
+      notifySuccess(responseData.message);
+      navigate(-1);
       },
       onError: (error:AxiosError) => {
         console.log("Blog could not be Added");
-        notify(error.message || "An error occurred");
+        // notify(error.message || "An error occurred");
+        notifyError(error.message || "An error occurred");
       },
   });
   
@@ -77,7 +79,7 @@ function SendMail() {
             <div className="flex gap-4">
                 <Button
                 variant={'outline'}
-                className="bg-white hover:text-bg-black hover:border-white text-black hover:text-white cursor-pointer"
+                className="bg-white hover:text-bg-black hover:border-white text-black hover:bg-gray-200 cursor-pointer"
                 onClick={() => mutate()}
                 >Send</Button>
                 <Button
@@ -86,7 +88,6 @@ function SendMail() {
                 onClick={() => navigate(-1)}
                 >Cansel</Button>
             </div>
-            <ToastContainer position="bottom-right" theme="dark" />
         </div>
     </>
   )

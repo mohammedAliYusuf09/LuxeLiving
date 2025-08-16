@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type { postInter } from "../lib/types";
 import axios, { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 export interface Blog {
   post: postInter;
 }
@@ -68,7 +68,6 @@ const readableDateTime = date.toLocaleString();
           delete
         </button>
       </div>
-      <ToastContainer position="bottom-right" theme="dark" />
     </article>
   );
 }

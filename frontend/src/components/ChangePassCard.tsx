@@ -9,18 +9,17 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { notifyError, notifySuccess } from "@/lib/tostCollection";
 import type { ResetPassword } from "@/lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { TfiClose } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 
 
 export function ChangePassCard() {
   const navigate = useNavigate();
-  const notify = (message: string) => toast(message);
     const [form, setFrom] = useState<ResetPassword>({
       oldPassword: "",
       newPassword: ""
@@ -55,11 +54,12 @@ export function ChangePassCard() {
           oldPassword: "",
           newPassword: ""
         })
-      notify(responseData.message);
+      notifySuccess(responseData.message);
       navigate("/settings")
       },
       onError: (error:AxiosError) => {
-        notify(error.message || "An error occurred");
+        notifyError(error.message || "An error occurred");
+        // notify(error.message || "An error occurred");
       },
   });
 
@@ -118,7 +118,6 @@ export function ChangePassCard() {
           Reset Password
         </Button>
       </CardFooter>
-      <ToastContainer position="bottom-right" theme="dark" />
     </Card>
   )
 }

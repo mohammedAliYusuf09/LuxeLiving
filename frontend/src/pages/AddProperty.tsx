@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
-import { ToastContainer, toast } from 'react-toastify';
 import type { PropertyForm } from "../lib/types";
 import { useNavigate } from "react-router-dom";
+import { notifySuccess } from "@/lib/tostCollection";
 
 function AddProperty() {
     const [form, setForm] = useState<PropertyForm>({
@@ -32,8 +32,6 @@ function AddProperty() {
     const [error, setError] = useState<string | null>(null);
 
     const navigate = useNavigate();
-
-    const notify = () => toast("Peoperty Successfully Added");
 
 
   
@@ -81,7 +79,7 @@ function AddProperty() {
             lng: "",
             images: [],
           });
-          notify();
+          notifySuccess(response.data.message);
           navigate('/propertys');
 
         } catch (error: unknown) {
@@ -384,10 +382,6 @@ function AddProperty() {
             /> 
           :"Submit Property"}
         </button>
-        <ToastContainer 
-        position= "bottom-center"
-        theme="dark"
-        />
       </div>
     </form>
   );
