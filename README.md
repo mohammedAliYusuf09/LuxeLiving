@@ -32,11 +32,9 @@
 - **Backend**: 
   ![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white)
   ![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white)
-  ![NextAuth](https://img.shields.io/badge/-NextAuth-000000?logo=next.js&logoColor=white)
 
 - **Services**: 
   ![Cloudinary](https://img.shields.io/badge/-Cloudinary-3448C5?logo=cloudinary&logoColor=white)
-  ![Vercel](https://img.shields.io/badge/-Vercel-000000?logo=vercel&logoColor=white)
 
 ## 📚 What I Learned
 Building LuxeLiving provided valuable experience in:
