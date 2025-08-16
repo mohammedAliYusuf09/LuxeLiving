@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion } from "motion/react";
 
 const ImageGallery = ({images} : {images : string[]}) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -26,11 +27,24 @@ const ImageGallery = ({images} : {images : string[]}) => {
             }`}
             onClick={() => setSelectedImage(img)}
           >
-            <img
+            {
+              img ? <img
               src={img}
               alt={`Thumb ${index}`}
               className="h-24 w-full object-cover hover:scale-105 transition-transform duration-200"
-            />
+            /> : <motion.div
+            className="h-24 w-full rounded-md"
+            animate={{
+              backgroundColor: ["#9CA3AF", "#E5E7EB", "#9CA3AF"], // gray-400 → gray-200 → gray-400
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+            }
+            
           </div>
         ))}
       </div>
