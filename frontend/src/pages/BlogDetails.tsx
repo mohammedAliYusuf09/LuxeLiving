@@ -10,6 +10,9 @@ function BlogDetails() {
 
     const { setBlog } = useBlogStore();
 
+   
+    
+
     
 
     const getBlogDetails = async (): Promise<Blog | string> => {
@@ -30,6 +33,12 @@ function BlogDetails() {
         queryKey: ['blogDetails'],
         queryFn: getBlogDetails
       })
+
+      if (data) {
+        console.log(data);
+      }
+
+       
 
       if(error){
         return <h5 className="text-center mt-4 text-red">{error?.message}</h5>

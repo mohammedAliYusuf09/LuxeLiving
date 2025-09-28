@@ -23,9 +23,7 @@ import { MdHorizontalRule } from "react-icons/md";
 import { BsFileBreak } from "react-icons/bs";
 import { FaUndoAlt } from "react-icons/fa";
 import { FaRedoAlt } from "react-icons/fa";
-import { FaRegImage } from "react-icons/fa";
 import { MdDownloadDone } from "react-icons/md";
-import axios from "axios";
 
 interface TipTapProp {
   handleHtmlSave: ( body: string) => void,
@@ -67,51 +65,7 @@ function TipTap({ handleHtmlSave, editor }: TipTapProp) {
     },
   });
 
-  const handleImageUploadAndSetOnEditer = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
 
-    if (!file.type.startsWith("image/")) {
-      alert("Only image files are allowed.");
-      return;
-    }
-
-    const maxSize = 5 * 1024 * 1024;
-    if (file.size > maxSize) {
-      alert("Image must be smaller than 5MB.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", file);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/blog/upload-image",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
-
-      if (response?.data.url) {
-        if (!editor) {
-          console.warn("Editor not initialized.");
-          return;
-        }
-
-        editor.chain().focus().setImage({ src: response.data.url }).run();
-      }
-    } catch (error) {
-      console.error("Upload failed:", error);
-      alert("Failed to upload image.");
-    }
-  };
 
   const passhtmlContent = () => {
     if(editor){
@@ -269,17 +223,7 @@ function TipTap({ handleHtmlSave, editor }: TipTapProp) {
         >
           <FaRedoAlt/>
         </button>
-        <label htmlFor="imageToUpload" className="cursor-pointer btnTop flex items-center gap-2">
-          <FaRegImage className="text-xl" />
-          <input
-            id="imageToUpload"
-            type="file"
-            name="imageToUpload"
-            accept="image/*"
-            onChange={handleImageUploadAndSetOnEditer}
-            className="hidden"
-          />
-        </label>  
+      
        
 
        
